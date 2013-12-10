@@ -1,0 +1,65 @@
+ <div id="content" class="margin span8" role="main">
+     {{$config:=.SiteConfig}}
+     {{$siteURL := $config.SiteURL}}
+     {{range $index,$article:= .Articles}}
+      {{with $article}}
+     <article id="post-{{$index}}" class="post-{{$index}} post type-post status-publish format-standard hentry ">
+         <div class="post-title box">
+             <h1 class="entry-title"><a href="{{$siteURL}}/article/{{.Name}}">{{.Title}}</a></h1>
+             <div class="post-meta">
+                 <ul>
+                     <li><time class="entry-date" datetime="{{.CreatedTime}}">
+                             {{$ctime:=.CreatedTime}}
+                             {{$ctime.Year}}年{{$ctime.Month}}月{{$ctime.Day}}日
+                         </time></li>
+                     <li class="divider">/</li>
+                     {{$innode:=.GetNode}}	
+                     <li>
+                         <a href="{{$siteURL}}/node/{{$innode.Name}}" title="查看所有文章在 {{$innode.Title}}">{{$innode.Title}}</a>
+                     </li>                      
+                     <li class="divider">/</li>
+                     <li><a href="{{$siteURL}}/article/{{.Name}}#disqus_thread"></a>
+                     </li>
+                 </ul>
+             </div>
+             <div class="post-format-badge post-format-standard">
+                 <i class="icon-calendar-3"></i>
+             </div>
+         </div>
+		 {{if .IsThumbnail}}
+		    {{$pic:=.FeaturedPicURL}}
+            {{if $pic}}
+		       <!-- <div class="entry-image">
+		             <a href="{{$pic}}" title="{{.Title}}" class="lightbox" rel="bookmark">
+		                 <img  src="{{$pic}}" class="size-full wp-image-971 aligncenter" alt="{{.Title}}">
+		             </a>
+		         </div>-->
+				<div class="entry-container noimg">
+			{{else}}
+	         	<div class="entry-container noimg">
+			{{end}}
+    				<div class="entry-content">
+    	                 {{.Text}}
+    	                 <footer class="entry-meta clearfix">
+    	                    <ul></ul>
+    	                 </footer>
+    	            </div>
+			    </div>	
+         {{else}}
+			<div class="entry-container noimg">
+			 	<div class="entry-content">
+	                 {{.Summary}}
+					 <a href="{{$siteURL}}/article/{{.Name}}#more" class="more-link">继续阅读…</a>
+	                 <footer class="entry-meta clearfix">
+	                    <ul></ul>
+	                 </footer>
+	            </div>
+			</div>
+         {{end}} 
+     </article>
+     {{end}}
+     {{end}}
+     <div class="pagination">
+        {{.Data.Vars.Pager}}
+     </div>
+ </div>

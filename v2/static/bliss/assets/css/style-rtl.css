@@ -1,0 +1,140 @@
+body{
+	direction: rtl;
+	unicode-bidi: embed;
+}
+
+header#masthead .bl_search
+{
+	float: left;
+}
+.pull-left{
+	float: right;
+}
+.pull-right{
+	float: left;
+}
+
+.navbar .nav,
+.navbar .brand,
+.post-meta ul li,
+.navbar .nav > li,
+.bl_socialbox li
+{
+	float: right;
+}
+
+
+.widget_recent_entries li span.badge, #side-bar .widget_nav_menu ul li span.badge, .widget_categories li span.badge, .widget_recent_comments li span.badge, .widget_pages li span.badge, .widget_meta li span.badge, .widget_archive li span.badge{
+	right: auto;
+	left: 15px;
+}
+footer.entry-meta .up_arrow:after, footer.entry-meta .up_arrow:before{
+	left: auto;
+	right: 45px;
+}
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle{
+	-moz-border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+.input-append input, .input-append select, .input-append .uneditable-input{
+	-moz-border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;	
+}
+footer.entry-meta .author-meta{
+	padding-left: 0;
+	padding-right: 70px;
+}
+footer.entry-meta .avatar{
+	left: auto;
+	right: 0;
+}
+.navbar .nav > li > a {
+  border-left: 0;
+  border-right: 3px solid transparent;
+}
+
+/* header */
+#masthead .brand, #masthead .brand h1{
+	float: right;
+}
+#masthead .brand small{
+	float: left; 
+}
+#masthead .brand img{
+	float: right;
+}
+#masthead .brand img + h1{
+  margin-top: 27px;
+}
+
+/* navbar */
+.navbar{
+	float: right;
+}
+.navbar .nav{
+	left: auto;
+	right: 0;
+}
+#masthead .bluth-navigation .mini-logo{
+	float: right;
+}
+#masthead .bluth-navigation .mini-logo h1, #masthead .bluth-navigation .mini-logo img{
+	border-right: none;
+	border-left: 2px solid rgba(0, 0, 0, 0.05);
+	padding-right: 0;
+	padding-left: 5px; 
+}
+#masthead .searchform a{
+	left: 0;
+	right: auto;
+}
+header#masthead .bl_search{
+	float: none;
+}
+
+/* posts */
+.post-title{
+	padding: 35px 45px 35px 105px;
+}
+.post-title h1, .post-meta{
+	text-align: right;
+}
+.navbar .nav, .navbar .brand, .post-meta ul li, .navbar .nav > li, .bl_socialbox li{
+	float: left;
+}
+.post-meta ul li{
+	margin-right: 0;
+	margin-left: 15px;
+}
+.post-meta ul li:first-child{
+	margin: 0;	
+}
+.post-meta ul li:last-child{
+	margin-left: 15px;
+}
+.post-format-badge{
+	right: auto;
+	left: 0;
+}
+
+/* posts single */
+
+/* widgets */
+#side-bar .bl_flickr h3 a{
+	right: auto;
+	left: 20px;
+}
+
+#bl_side_tags .bl_tab_tag{
+	float: right;
+}
+
+.widget_tag_cloud .tagcloud a{
+	float: right;
+}
+
+.navbar .nav, .navbar .brand, .post-meta ul li, .navbar .nav > li, .bl_socialbox li{
+	float: right;
+}

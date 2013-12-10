@@ -1,0 +1,91 @@
+div.wp-synhighlighter-outer {
+	color:black;
+}
+
+div.wp-synhighlighter-inner {
+	height: auto;
+	overflow-x: auto;
+	background-color:#F8F8F8;
+	padding: 0;
+	border:1px solid #F0F0F0;
+	clear: both;
+	margin-right: 0px;
+	margin-bottom: 8px;
+	margin-left: 0px;
+	display: block;
+	line-height: normal;
+	text-align: left;
+	white-space: nowrap;
+    width: 100%;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+}
+
+
+
+div.wp-synhighlighter-collapsed {
+	background: #E9E9E6 none repeat scroll 0 0;
+	clear: both;
+	background: transparent url(images/icon_plus.gif) no-repeat scroll left
+		center;
+	display: block;
+	padding-left: 14px;	margin-bottom: 8px;	
+	margin-top: 8px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	line-height: normal;
+	text-align: left;	
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+}
+
+div.wp-synhighlighter-expanded {
+	background: #E9E9E6 none repeat scroll 0 0;
+	clear: both;
+	background: transparent url(images/icon_minus.gif) no-repeat scroll left
+		center;
+	display: block;
+	padding-left: 14px;
+	margin-top: 8px;
+	margin-right: 0px;
+	margin-left: 0px;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	line-height: normal;
+	text-align: left;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+}
+
+
+a.wp-synhighlighter-title {
+	cursor: pointer;
+	font-size: small;
+}
+
+div.wp-synhighlighter-inner pre {
+	background: none;
+	border: none;
+	margin: auto;
+	padding: inherit;
+	line-height: normal;
+}
+
+div.wp-synhighlighter-inner ol {
+	list-style-position: outside !important;
+	margin-bottom: 0;    margin-left: 30px;    margin-top: 0;
+}
+
+div.wp-synhighlighter-inner li {
+	list-style-position: outside !important
+}

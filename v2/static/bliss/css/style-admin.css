@@ -1,0 +1,35 @@
+/*  Meta boxes  */
+div.cd-layout {  
+    width:200px;  
+    float:left;   
+}  
+  
+div.cd-layout input {  
+    display: none;    
+} 
+div.cd-layout label  {  
+	position: relative;
+} 
+div.cd-layout label > img {  
+	border: 2px solid transparent;
+} 
+div.cd-layout input[type=radio]:checked + label img {  
+	border-color: #2C9ACB;
+} 
+  
+#bluth_post_meta .clearfix:after {  
+    clear: both;  
+    content: ' ';  
+    display: block;  
+    font-size: 0;  
+    line-height: 0;  
+    visibility: hidden;  
+    width: 0;  
+    height: 0;  
+      
+}  
+  
+#bluth_post_meta label span {  
+    display:block;  
+    margin-top:5px;  
+} 

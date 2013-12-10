@@ -1,0 +1,90 @@
+<div id="content" class="span8" role="main">
+   {{$config:=.SiteConfig}}
+     {{$siteURL := $config.SiteURL}}
+     {{$article:= .Article}}
+     {{with $article}}
+     <article id="post-{{.Id_ }}" class="post-{{.Id_}} post type-post status-publish format-standard hentry ">
+         <div class="post-title box">
+             <h1 class="entry-title"><a href="{{$siteURL}}/article/{{.Name}}">{{.Title}}</a></h1>
+             <div class="post-meta">
+                 <ul>
+                     <li><time class="entry-date" datetime="{{.CreatedTime}}">
+                             {{$ctime:=.CreatedTime}}
+                             {{$ctime.Year}}年{{$ctime.Month}}月{{$ctime.Day}}日
+                         </time></li>
+                     <li class="divider">/</li>
+                     {{$innode:=.GetNode}}  
+                     <li>
+                         <a href="{{$siteURL}}/node/{{$innode.Name}}" title="查看所有文章在 {{$innode.Title}}">{{$innode.Title}}</a>
+                     </li>                      
+                     <li class="divider">/</li>
+                     <li><a href="{{$siteURL}}/article/{{.Name}}#disqus_thread"></a>
+                     </li>
+                 </ul>
+             </div>
+             <div class="post-format-badge post-format-standard">
+                 <i class="icon-calendar-3"></i>
+             </div>
+         </div>      
+         <div class="entry-container noimg">
+		 	<div class="entry-content">
+                 {{.Text}}
+                 <footer class="entry-meta clearfix">
+                    <ul></ul>
+                 </footer>
+            </div>
+         </div>
+     </article>
+     {{end}}
+    <!-- #post-786 -->
+
+    <div class="single-pagination clearfix">
+        <div class="box clearfix">
+            {{$PreArticle:=.Data.Vars.PreArticle}}
+            {{$NextArticle:=.Data.Vars.NextArticle}}
+            {{if $PreArticle.Name}}
+            {{with $PreArticle}}
+            <a href="{{$siteURL}}/article/{{.Name}}" class="nav-previous">
+                <div class="bgfallback">&nbsp;</div>
+                <span>&nbsp;</span>
+                <div class="tab_icon tab_standard"><i class="icon-calendar-3"></i></div>
+                <div class="bgimage" style="background-image: url(&#39;{{.FeaturedPicURL}}&#39;);"></div>
+                <h5><i class="icon-angle-double-left"></i>{{.Title}}</h5>
+            </a>
+            {{end}}
+            {{end}}
+            {{if $NextArticle.Name}}
+            {{with $NextArticle}}
+            <a href="{{$siteURL}}/article/{{.Name}}" class="nav-next" style="float: right;">
+                <div class="bgfallback">&nbsp;</div>
+                <span>&nbsp;</span>
+                <div class="tab_icon tab_standard"><i class="icon-calendar-3"></i></div>
+                <div class="bgimage" style="background-image: url(&#39; {{.FeaturedPicURL}}&#39;);"></div>
+                <h5>{{.Title}} <i class="icon-angle-double-right"></i></h5>
+            </a>
+             {{end}}
+            {{end}}
+        </div>
+    </div>
+    ﻿{{if .SameTagArticls}}
+    <div id="related-posts" class="row-fluid box">
+        <h3>You might also like</h3>
+        {{range $index,$value:=.SameTagArticls}}
+        {{with $value}}
+        <a href="{{$siteURL}}/article/{{.Name}}" class="nav-previous">
+        <div class="bgfallback">&nbsp;</div>
+        <span>&nbsp;</span>
+        <div class="tab_icon tab_standard"><i class="icon-calendar-3"></i></div>
+        <div class="bgimage" style="background-image: url('{{.FeaturedPicURL}}');"></div>
+        <h5>{{.Title}}</h5>
+        <p>{{.GetFirstParagraph}}</p>
+        </a>
+        {{end}}
+        {{end}}
+    </div>     
+{{end}}
+{{template "disqus" .}}
+    <!-- #comments .comments-area -->
+
+</div>
+<!-- #content .site-content -->

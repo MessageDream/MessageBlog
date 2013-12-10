@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xml:lang="en-US" lang="en-US">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+			{{if .Data.Flags.Single}}
+				{{.Data.Vars.ArticleTitle}}|
+			{{end}}
+			{{.Data.SiteConfig.SiteTitle | html}}
+	</title>
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="../static/{{$.Data.SiteConfig.ThemeName}}/css/style.css" type="text/css" media="screen" /> 
+	<link rel="shortcut icon" type="image/png" href="../static/{{$.Data.SiteConfig.ThemeName}}/image/favicon.ico" />    
+	<link href="/feed/atom" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />    
+	<script type="text/javascript" src="../static/{{$.Data.SiteConfig.ThemeName}}/js/jquery.js"></script>
+	<script type="text/javascript" src="../static/{{$.Data.SiteConfig.ThemeName}}/js/main.js"></script>
+</head>
+<body>
+	<!--header-->
+<div id="header">
+	<div id="nav_wrapper">
+		<div id="nav">
+			<div class="inner">
+				<h1 id="title"><a href="{{.Data.SiteConfig.SiteURL}}">{{.Data.SiteConfig.SiteTitle}}</a></h1>
+				<div id="description" class="seal">{{.Data.SiteConfig.SiteSubTitle}}</div>
+				<ul class="right">
+					<li><a href="/">Home</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/tag/tech">Tech</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/tag/english">English</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/tag/paint">Artworks</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/tag/linux">Linux</a></li>
+					<li class="dot">&bull;</a>
+					<li><a href="/about">About</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="header_inner">
+		<div id="social">
+			<a href="http://twitter.com/Jayden_Zhao" target="_blank" title="Follow Me @ Twitter"><img src="../static/{{$.Data.SiteConfig.ThemeName}}/image/ic16_twitter.png"></a>
+			<a href="http://github.com/MessageDream" target="_blank" title="Fork Me @ Github"><img src="../static/{{$.Data.SiteConfig.ThemeName}}/image/ic16_github.png"></a>
+			<a href="http://feeds.feedburner.com/shellex-cn" target="_blank" title="Subscribe My Blog"><img src="../static/{{$.Data.SiteConfig.ThemeName}}/image/ic16_rss.png"></a>
+		</div>
+		<div id="search">
+		  <form action="http://google.com/search" method="get" accept-charset="utf-8">
+		    <input type="text" name="q" results="0" class="search_box" placeholder="Search">
+		    <input type="hidden" name="q" value="site:lyric.im">
+		  </form>
+		</div>
+		<div class="sep"></div>
+	</div>
+</div>
+
+ {{.LayoutContent}}
+
+<!--footer-->
+<div id="footer_wrapper">
+<div id="footer">
+	<div id="footer_inner">
+		<div class="archives col">
+			<h2>Archives</h2>
+		</div>
+		<div class="tag_cloud col">
+			<h2>Tag Cloud</h2>
+			{{ range $index, $tag := .TagList }}
+			<a class="tag" href="/tag/{{$tag.Name}}">{{$tag.Name}}({{$tag.Count}})</a>
+			{{end}}
+		</div>
+		<div class="links col">
+			<h2>Links</h2>
+			<ul>
+				<li><a href="http://zorayoyo.me">Zora</a></li>
+				<li><a href="http://shellexy.info">Shellex Wang</a></li>
+				<li><a href="http://hotot.org">Project Hotot</a></li>
+			</ul>
+		</div>
+		<div class="copyright">
+			© Shellex Wai, All rights reserved.
+			<span>&bull;</span> 
+			Powered by <a href="https://github.com/shellex/tattoo">TATTOO!</a> and <a href="http://golang.org">Go</a>
+			<span>&bull;</span> 
+			SealScript Theme by <a href="http://shellex.info">Shellex</a>
+		</div>
+	</div>
+</div>
+</div>
+{{if .Data.Flags.Single}}
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{{end}}
+{{if  .Data.Flags.Page}}
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{{end}}
+
+<script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4178606-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<!-- Navigation Utils -->
+<a id="scroll_to_top" href="#" class="v_nav"></a>
+{{ if not .Data.Flags.Page }} 
+	{{ if .Data.Flags.Single}} 
+		<!-- for single page -->
+		{{$cur_name:=$.Data.Vars.ArticleName}}
+		{{ $prev_name := $.Data.Vars.PrevArticleName }}
+		{{ $next_name := $.Data.Vars.NextArticleName }}
+		<a id="prev" href="/{{$prev_name}}" hash="{{$cur_name}}" class="v_nav"
+			{{ if $prev_name }} 
+			style="display: block"
+			{{ else }}
+			style="display: none"
+			{{ end }}
+			>
+			<span class="icon">Prev</span>
+		</a>
+		<a id="next" href="/{{$next_name}}" hash="{{$cur_name}}" class="v_nav"
+			{{ if $next_name }} 
+			style="display: block"
+			{{ else }}
+			style="display: none"
+			{{ end }}
+			>
+			<span class="icon">Next</span>
+		</a>
+	{{ else }}
+		<!-- for list page -->
+		{{ $cur_offset := .Data.Vars.Offset }}
+		{{ if .Data.Flags.Tag }}
+			<!-- for tag page -->
+			{{ $tag :=.Data.Vars.TagName }}
+			<a id="prev" href="/tag/{{$tag}}?pos={{.Data.Vars.PrevTLPos}}" class="v_nav" hash="t/{{$tag}}?pos={{$cur_offset}}"
+				{{ if .Data.Vars.AtBegin }} 
+				style="display: none"
+				{{ else }}
+				style="display: block"
+				{{ end }}
+				>
+				<span class="icon">Prev</span>
+			</a>
+			<a id="next" href="/tag/{{$tag}}?pos={{.Data.Vars.NextTLPos}}" class="v_nav" hash="t/{{$tag}}?pos={{$cur_offset}}"
+				{{ if .Data.Vars.AtEnd }} 
+				style="display: none"
+				{{ else }}
+				style="display: block"
+				{{ end }}
+				>
+				<span class="icon">Next</span>
+			</a>
+		{{ else }}
+		<!-- for articles page -->
+		<a id="prev" href="/?pos={{.Data.Vars.PrevTLPos}}" class="v_nav" hash="pos={{$cur_offset}}"
+			{{ if .Data.Vars.AtBegin }} 
+			style="display: none"
+			{{ else }}
+			style="display: block"
+			{{ end }}
+			>
+			<span class="icon">Prev</span>
+		</a>
+		<a id="next" href="/?pos={{ .Data.Vars.NextTLPos}}" class="v_nav" hash="pos={{$cur_offset}}"
+			{{ if .Data.Vars.AtEnd }} 
+			style="display: none"
+			{{ else }}
+			style="display: block"
+			{{ end }}
+			>
+			<span class="icon">Next</span>
+		</a>
+		{{ end }}
+	{{ end }}
+{{ end }}
+<!-- Debug Info -->
+<!-- <div style="display:none"> Cost Time: {{.ContextInfo.During}} microseconds </div> -->
+</body>
+</html>
+

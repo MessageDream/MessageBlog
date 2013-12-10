@@ -1,0 +1,169 @@
+{{$config:=.SiteConfig}}
+<div>
+	<ul class="breadcrumb">
+		<li>
+			<a href="/root">主页</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a id="currenttitle" href="#"></a>
+		</li>
+	</ul>
+</div>
+
+<div class="sortable row-fluid">
+	<a data-rel="tooltip" title="6 个新订阅。" class="well span3 top-block" href="#">
+		<span class="icon32 icon-red icon-user"></span>
+		<div>博客订阅人数</div>
+		<div>507</div>
+		<span class="notification">6</span>
+	</a>
+
+	<a data-rel="tooltip" title="4 篇新文章" class="well span3 top-block" href="#">
+		<span class="icon32 icon-color icon-star-on"></span>
+		<div>文章总数</div>
+		<div>228</div>
+		<span class="notification green">4</span>
+	</a>
+
+	<a data-rel="tooltip" title="$34 new sales." class="well span3 top-block" href="#">
+		<span class="icon32 icon-color icon-cart"></span>
+		<div>Sales</div>
+		<div>$13320</div>
+		<span class="notification yellow">$34</span>
+	</a>
+	
+	<a data-rel="tooltip" title="12 new messages." class="well span3 top-block" href="#">
+		<span class="icon32 icon-color icon-envelope-closed"></span>
+		<div>Messages</div>
+		<div>25</div>
+		<span class="notification red">12</span>
+	</a>
+</div>
+			
+<div class="sortable row-fluid">
+	<div class="box span8">
+		<div class="box-header well">
+			<h2><i class="icon-list-alt"></i>流量信息</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<script src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/root/js/highcharts.js"></script>
+		    <script type="text/javascript">
+			    $(function () {
+			        $('#container').highcharts({
+			            chart: {
+			                type: 'line',
+			                marginRight: 130,
+			                marginBottom: 25
+			            },
+			            title: {
+			                text: '最近24小时流量趋势',
+			                x: -20 //center
+			            },
+			            subtitle: {
+			                text: '数据来源:本站日志文件',
+			                x: -20
+			            },
+			            xAxis: {
+			                categories: ['23:00', '1:00', '3:00', '5:00', '7:00', '9:00',
+			                             '11:00', '13:00', '15:00', '17:00', '19:00', '21:00', '23:00', '1:00']
+			            },
+			            yAxis: {
+			                title: {
+			                    text: '流量数目'
+			                },
+			                plotLines: [{
+			                    value: 0,
+			                    width: 1,
+			                    color: '#808080'
+			                }]
+			            },
+			            tooltip: {
+			                valueSuffix: 'IP'
+			            },
+			            legend: {
+			                layout: 'vertical',
+			                align: 'right',
+			                verticalAlign: 'top',
+			                x: -10,
+			                y: 100,
+			                borderWidth: 0
+			            },
+			            series: [ {
+			                name: '独立IP访客',
+			                data: [0, 1, 6, 12, 18, 23, 25, 25, 21, 15, 9, 4,12,16]
+			            }]
+			        });
+			    });
+		    </script>
+	    	<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+		</div>
+	</div>
+	<div class="box span4">
+		<div class="box-header well" data-original-title>
+			<h2><i class="icon-list"></i> 服务器资讯</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<ul class="dashboard-list">
+				<li>
+					<a href="#">
+						<i class="icon-circle-arrow-right"></i>                               
+						<span style="width: auto;" class="green">操作系统：</span>
+						<span style="width: auto;" class="green">{{.remoteos}} {{.remotearch}}</span>                             
+					</a>
+				</li>
+			  <li>
+				<a href="#">
+				  <i class="icon-circle-arrow-right"></i>
+				  <span style="width: auto;" class="red">CPU数量：</span>
+				   <span style="width: auto;" class="red">{{.remotecpus}}</span>
+				</a>
+			  </li>
+			  <li>
+				<a href="#">
+				  <i class="icon-circle-arrow-right"></i>
+				  <span style="width: auto;" class="blue">GO版本：</span>
+				   <span style="width: auto;" class="blue"> {{.golangver}}</span>                              
+				</a>
+			  </li>
+			    <li>
+				<a href="#">
+				  <i class="icon-circle-arrow-right"></i>
+				  <span style="width: auto;" class="yellow">并发协程：</span>
+				   <span style="width: auto;" class="yellow"> {{.remotecpus}}</span>                              
+				</a>
+			  </li>
+			   <li>
+				<a href="#">
+				  <i class="icon-circle-arrow-right"></i>                               
+				  <span style="width: auto;" class="green">数据存储：</span>
+				 <span style="width: auto;" class="green">MongoDB V{{.dbinfo}}</span>                              
+				</a>
+			  </li>
+			  <li>
+				<a href="#">
+				  <i class="icon-circle-arrow-right"></i>
+				  <span style="width: auto;" class="red">绑定域名：</span>
+				   <span style="width: auto;" class="red">{{.remotehost}}</span>                                 
+				</a>
+			  </li>
+			  <li>
+				<a href="#">
+				  <i class="icon-circle-arrow-right"></i>                               
+				  <span style="width: auto;" class="blue">协议版本：</span>
+				 <span style="width: auto;" class="blue">{{.remoteproto}}</span>                              
+				</a>
+			  </li>
+			  
+			</ul>
+		</div>
+	</div><!--/span-->
+</div>
+												

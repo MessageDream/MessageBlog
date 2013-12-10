@@ -1,0 +1,179 @@
+{{$config:=.SiteConfig}}
+<div>
+	<ul class="breadcrumb">
+		<li>
+			<a href="/root">主页</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a id="currenttitle" href="#"></a>
+		</li>
+	</ul>
+</div>
+<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>添加标签</h3>
+			</div>
+			<div class="modal-body">
+				<label class="control-label" for="newTag">标签：</label>
+				<input class="input-xlarge focused" id="newTag" name="newTag" type="text" >
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" id="closetag" data-dismiss="modal">关闭</a>
+				<a href="#" id="addtagok" class="btn btn-primary">保存</a>
+			</div>
+		</div>
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title>
+			<h2><i class="icon-edit"></i> 添加文章</h2>
+			<div class="box-icon">
+				<a href="#" id="expand" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content" id="hidecontent" style="display:none;">
+			<form class="form-horizontal" method="post" action="/root/article">
+				<fieldset>
+				<input id="id" name="id" style="display:none"/>
+				 <div class="control-group">
+					<label class="control-label" for="selectnode">节点：</label>
+					<div class="controls">
+					  	<select  id="selectnode" name="selectnode" class="input-xlarge focused" data-rel="chosen">
+					  		{{range $ind,$val:=.Category}}
+					  		{{with $val}}
+								<optgroup value="{{.Name}}" label="{{.Title}}">
+									{{range $in,$va:=.Nodes}}
+									{{with $va}}
+								 	 <option value="{{.Name}}">{{.Title}}</option>
+									{{end}}
+								    {{end}}
+								</optgroup>
+							{{end}}
+						{{end}}
+					  </select>
+					</div>
+				  </div>
+				  <div class="control-group">
+					<label class="control-label" for="title">标题：</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="title" name="title" type="text" >
+					</div>
+				  </div>
+				  <div class="control-group warning">
+					<label class="control-label" for="name">名称：</label>
+					<div class="controls">
+					  <input type="text" id="name"  name="name"   class="input-xlarge focused">
+					  <span class="help-inline">建议填写标题的英文小写形式，单词间以-分割。</span>
+					</div>
+				  </div>
+				  <div class="control-group">
+					<label class="control-label" for="content">内容：</label>
+					<div class="controls">
+						<div style="width:800px">
+						 	<textarea class="ckeditor"  name="content" rows="3" id="content1" ></textarea>
+						 	<script src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/root/js/ckeditor/ckeditor.js"></script> 
+						 	<script src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/root/js/main/article.js"></script> 
+						 </div>
+					</div>
+				  </div>
+				 <div class="control-group">
+						<label class="control-label">类型：</label>
+						<div class="controls">
+						  <label class="checkbox inline">
+							<input type="checkbox" id="isThumbnail" name="isThumbnail" value="true">短文
+						  </label>
+						</div>
+					</div>
+				   <div class="control-group" id="featuredPic">
+					<label class="control-label" for="featuredPicURL">预览图片地址：</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="featuredPicURL" name="featuredPicURL" type="text" >
+					</div>
+				  </div>
+				<div class="control-group">
+					<label class="control-label" for="tags">Tags：</label>
+					<div class="controls">
+					  <select id="tags" name="tags" data-placeholder="选择标签" class="input-xlarge" multiple data-rel="chosen">
+					  	{{range $in,$va:=.Tags}}
+							{{with $va}}
+						 	 <option value="{{.Title}}">{{.Title}}</option>
+							{{end}}
+						 {{end}}
+					  </select>
+					  <a class="btn btn-primary" id="addTag"><i class="icon-plus icon-white"></i></a>
+					</div>
+				</div>
+				  <div class="form-actions">
+					<button type="submit" class="btn btn-primary">保存</button>
+					<button class="btn" id="cancelAdd">取消</button>
+				  </div>
+				</fieldset>
+			  </form>
+		</div>
+	</div><!--/span-->		
+</div><!--/row-->
+
+<div class="row-fluid sortable">		
+	<div class="box span12">
+	<div class="box-header well" data-original-title>
+		<h2><i class="icon-th-list"></i> 文章列表</h2>
+		<div class="box-icon">
+			<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+			<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+		</div>
+	</div>
+	<div class="box-content">
+	    <table class="table table-bordered table-striped table-condensed">
+			  <thead>
+				  <tr>
+				  	  <th>编号</th>
+					  <th>名称</th>
+					  <th>标题</th>
+					  <th>作者</th>
+					  <th>摘要</th>
+					  <th>标签</th>
+					  <th>点击量</th>
+					  <th>创建时间</th>
+					  <th>更新时间</th>
+					  <th>操作</th>
+				  </tr>
+			  </thead>   
+			  <tbody>
+			  	{{range $ind,$val:=.Articles}}
+			  	{{with $val}}
+				<tr>
+					<td class="center">{{.Id_.Hex}}</td>
+					<td class="center">{{.Name}}</td>
+					<td class="center">{{.Title}}</td>
+					<td class="center">{{.Author}}</td>
+					<td class="center">{{.Summary}}</td>
+					<td class="center">
+						{{range $in,$va:=.Tags}}
+							<li style="list-style:none">{{$va}}</li>
+						{{end}}
+					</td>
+					<td class="center">{{.Views}}</td>
+					<td class="center">{{.CreatedTime.Format "2006-01-02 15:04:05"}}</td>
+					<td class="center">{{.ModifiedTime.Format "2006-01-02 15:04:05"}}</td>
+					<td class="center">
+						<a class="btn btn-success" href="{{$config.SiteURL}}/article/{{.Name}}">
+							<i class="icon-zoom-in icon-white"></i>  
+							查看                                            
+						</a>
+						<a class="btn btn-info" href="#expand"  >
+							<i class="icon-edit icon-white"></i>  
+							编辑                                            
+						</a>
+						<a class="btn btn-danger" href="#" >
+							<i class="icon-trash icon-white"></i> 
+							删除
+						</a>
+					</td>
+				</tr>
+				{{end}}
+				{{end}}
+			  </tbody>
+		 	</table>          
+	</div>
+</div><!--/row-->

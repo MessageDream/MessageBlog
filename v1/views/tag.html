@@ -1,0 +1,25 @@
+<div class="article">
+	{{ $tag := .Data.Vars.TagName}}
+	<div class="inner">
+		<h2 class="title">Articles Tagged as "{{$tag}}"</h2>
+		<div class="text">
+			<ul>
+				{{ range $index, $article := .Articles}}
+				<li>
+				{{with $article.Metadata}}
+				{{$ctime := .GetCreatedTime}}
+				<span class="time_stamp">{{$ctime.Year}}-{{.GetShortMonth $ctime}}-{{$ctime.Day}}</span>
+				<a href="/{{.Name}}">{{.Title}}</a> 
+				(
+				<a href="/{{.Name}}#comments">{{$.Fn.GetArticleCommentCount .Name}}</a> Comments)
+				{{end}}
+				</li>
+				{{else}}
+				<li>
+				<div>There are no items</div>
+				<li>	
+				{{end}}
+			</ul>
+		</div>
+	</div>
+</div>

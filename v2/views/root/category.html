@@ -1,0 +1,117 @@
+{{$config:=.SiteConfig}}
+<div>
+	<ul class="breadcrumb">
+		<li>
+			<a href="/root">主页</a> <span class="divider">/</span>
+		</li>
+		<li>
+			<a id="currenttitle" href="#"></a>
+		</li>
+	</ul>
+</div>
+<script src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/root/js/main/category.js"></script> 
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title>
+			<h2><i class="icon-edit"></i> 添加分类</h2>
+			<div class="box-icon">
+				<a href="#" id="expand" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
+				<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+		<div class="box-content" id="hidecontent" style="display:none;">
+			<form class="form-horizontal" method="post">
+				<fieldset>
+				<input id="id" name="id" style="display:none"/>
+				  <div class="control-group">
+					<label class="control-label" for="title">标题：</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="title" name="title" type="text" >
+					</div>
+				  </div>
+				  <div class="control-group warning">
+					<label class="control-label" for="name">名称：</label>
+					<div class="controls">
+					  <input type="text" id="name"  name="name"   class="input-xlarge focused">
+					  <span class="help-inline">建议填写标题的英文小写形式，单词间以-分割。</span>
+					</div>
+				  </div>
+				  <div class="control-group">
+					<label class="control-label" for="contentid">内容：</label>
+					<div class="controls">
+					  <input class="input-xlarge focused" id="contentid"  name="content"  type="text">
+					</div>
+				  </div>
+				  <div class="form-actions">
+					<button type="submit" class="btn btn-primary">保存</button>
+					<button class="btn">取消</button>
+				  </div>
+				</fieldset>
+			  </form>
+		
+		</div>
+	</div><!--/span-->		
+</div><!--/row-->
+
+<div class="row-fluid sortable">		
+	<div class="box span12">
+	<div class="box-header well" data-original-title>
+		<h2><i class="icon-th-list"></i> 分类列表</h2>
+		<div class="box-icon">
+			<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+			<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+		</div>
+	</div>
+	<div class="box-content">
+		<table class="table table-bordered table-striped table-condensed">
+		  <thead>
+			  <tr>
+				  <th>编号</th>
+				  <th>名称</th>
+				  <th>标题</th>
+				  <th>内容</th>
+				  <th>节点</th>
+				  <th>点击量</th>
+				  <th>创建时间</th>
+				  <th>更新时间</th>
+				  <th>操作</th>
+			  </tr>
+		  </thead>   
+		  <tbody>
+		  	{{range $ind,$val:=.Category}}
+		  	{{with $val}}
+			<tr>
+				<td>{{.Id_.Hex}}</td>
+				<td >{{.Name}}</td>
+				<td class="center">{{.Title}}</td>
+				<td class="center">{{.Content}}</td>
+				<td class="center">
+					<select style="width:100px;">
+						{{range $in,$va:=.Nodes}}
+						{{with $va}}
+						<option value="{{.Name}}">{{.Title}}</option>
+						{{end}}
+						{{end}}
+					</select>
+				</td>
+				<td class="center">{{.Views}}</td>
+				<td class="center">{{.CreatedTime.Format "2006-01-02 15:04:05"}}</td>
+				<td class="center">{{.UpdatedTime.Format "2006-01-02 15:04:05"}}</td>
+				<td class="center">
+					<a class="btn btn-info" href="#expand">
+						<i class="icon-edit icon-white"></i>  
+						编辑                                            
+					</a>
+					<a class="btn btn-danger" href="#">
+						<i class="icon-trash icon-white"></i> 
+						删除
+					</a>
+				</td>
+			</tr>
+			{{end}}
+			{{end}}
+		  </tbody>
+	  </table>            
+	</div>
+	</div><!--/span-->
+</div><!--/row-->

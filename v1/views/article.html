@@ -1,0 +1,37 @@
+
+{{$article := .Article}}
+{{$siteURL :=.Data.SiteConfig.SiteURL}}
+<div class="article">
+	<div class="inner">
+		{{with $article.Metadata}}
+		<h2 class="article_title title"><a href="#">{{.Title}}</a></h2>
+		<div class="article_meta">
+			<div class="share">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="shellex">Tweet</a>
+				<div class="g-plusone" data-size="medium"></div>
+			</div>
+			<span>by</span>
+			{{.Author}}
+			<span>on</span>
+			{{$ctime := .GetCreatedTime}}
+			{{.GetShortMonth $ctime}} {{$ctime.Day}}, {{$ctime.Year}}
+			<span>with</span>
+			<a href="{{$siteURL}}/{{ $article.Metadata.Name}}#comments">{{$article.Comments}} Comments</a>
+		</div>
+		{{end}}
+		<div class="text">
+			{{$article.Text}}
+		</div>
+		<div class="big_sep"></div>
+		<div class="article_meta">
+			<span>tagged:</span>
+			{{range $tagIndex, $tag := $article.Metadata.Tags}}
+			<a class="tag" href="{{$siteURL}}/tag/{{$tag}}">{{$tag}},</a> 
+			{{end}}
+		</div>
+		<div id="comments" class="comments">
+			 {{template "disqus"}}
+		</div>
+	</div> <!-- .inner -->
+</div>	<!-- .article -->
+

@@ -20,10 +20,12 @@ func (this *rootBaseRouter) Prepare() {
 	}
 	if this.Ctx.Request.URL.Path != "/root/login" {
 		sess_username, _ := this.GetSession("username").(string)
-		this.Data["UserName"] = sess_username
 		//如果未登录
 		if sess_username == "" {
 			this.Ctx.Redirect(302, "/root/login")
+		} else {
+			this.SetSession("username", sess_username)
+			this.Data["UserName"] = sess_username
 		}
 	}
 

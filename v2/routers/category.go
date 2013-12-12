@@ -26,7 +26,7 @@ func (this *CategoryRouter) Get() {
 		page = 1
 	}
 
-	articles, total, err := models.GetArticlesByNode(&bson.M{"cname": categoryname}, (page-1)*limit, limit, "")
+	articles, total, err := models.GetArticlesByNode(&bson.M{"cname": categoryname}, (page-1)*limit, limit, "-createdtime")
 
 	if !this.CheckError(err) {
 		return

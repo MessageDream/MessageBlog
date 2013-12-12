@@ -14,22 +14,6 @@ type baseRouter struct {
 	beego.Controller
 }
 
-type T_FLAGS struct {
-	Home     bool
-	Articles bool
-	Single   bool
-	Tag      bool
-	Page     bool
-	Feed     bool
-
-	WriterOverview bool
-	WriterPages    bool
-	WriterTags     bool
-	WriterComments bool
-	WriterSettings bool
-	WriterEditor   bool
-}
-
 type CurrentCategoryInfo struct {
 	Title  string
 	Name   string
@@ -42,8 +26,7 @@ type CurrentCategoryInfo struct {
 }
 
 type T_DATA struct {
-	Flags T_FLAGS
-	Vars  interface{}
+	Vars interface{}
 }
 
 var (
@@ -135,7 +118,7 @@ func (c *CurrentCategoryInfo) GetCName() string {
 
 func (this *baseRouter) Prepare() {
 	if this.Ctx.Request.Method == "GET" {
-		this.Data["TagList"], _, _ = models.GetTags(&bson.M{}, 0, 10, "")
+		this.Data["TagList"] = models.Tags
 		this.Data["HotList"], _, _ = models.GetArticles(&bson.M{}, 0, 10, "-views")
 		this.Data["RecentList"], _, _ = models.GetArticles(&bson.M{}, 0, 10, "-createdtime")
 		this.Data["CategoryList"] = models.Categories

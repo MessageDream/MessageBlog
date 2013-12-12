@@ -92,8 +92,8 @@ func (article *Article) GetNode() *Node {
 	return &node
 }
 
-func (article *Article) GetTags() (*[]TagWrapper, error) {
-	return article.GetAllTags()
+func (article *Article) GetTags() *[]TagWrapper {
+	return article.GetSelfTags()
 }
 
 func (article *Article) CreatArticle() error {
@@ -126,14 +126,15 @@ func (article *Article) GetAroundArticle() (*Article, *Article, error) {
 }
 
 func (article *Article) GetSameTagArticles(limit int) (articles []Article) {
-	c := DB.C("tags")
-	var idSlice []struct{ Articleids []bson.ObjectId }
-	c.Find(&bson.M{"title": &bson.M{"$in": article.Tags}}).Select(&bson.M{"articleids": 1, "_id": 0}).All(&idSlice)
 	ids := make([]bson.ObjectId, 0)
-	for _, v := range idSlice {
-		for _, va := range v.Articleids {
-			if va != article.Id_ {
-				ids = append(ids, va)
+	for _, v := range Tags {
+		for _, tag := range article.Tags {
+			if tag == v.Title || tag == v.Name {
+				for _, va := range v.ArticleIds {
+					if va != article.Id_ {
+						ids = append(ids, va)
+					}
+				}
 			}
 		}
 	}
@@ -142,11 +143,16 @@ func (article *Article) GetSameTagArticles(limit int) (articles []Article) {
 	return
 }
 
-func (article *Article) GetAllTags() (*[]TagWrapper, error) {
-	c := DB.C("tags")
+func (article *Article) GetSelfTags() *[]TagWrapper {
 	var tags []TagWrapper
-	err := c.Find(bson.M{"title": bson.M{"$in": article.Tags}}).All(&tags)
-	return &tags, err
+	for _, v := range Tags {
+		for _, va := range v.ArticleIds {
+			if va != article.Id_ {
+				tags = append(tags, v)
+			}
+		}
+	}
+	return &tags
 }
 
 func (article *Article) HasFeaturedPic() bool {
@@ -333,23 +339,28 @@ type TagWrapper struct {
 
 func (tag *TagWrapper) SetTag() error {
 	c := DB.C("tags")
-	var oldtag TagWrapper
-	err := c.Find(bson.M{"name": tag.Name}).One(&oldtag)
-	if err != nil && err.Error() == "not found" {
+	var err error
+	flag := false
+	for _, v := range Tags {
+		if tag.Name == v.Name {
+			v.ArticleIds = append(v.ArticleIds, tag.ArticleIds...)
+			removeDuplicate(&v.ArticleIds)
+			v.Count = len(v.ArticleIds)
+			v.ModifiedTime = bson.Now()
+			err = c.UpdateId(v.Id_, v)
+			flag = true
+			break
+		}
+	}
+
+	if !flag {
 		tag.Id_ = bson.NewObjectId()
 		tag.CreatedTime = bson.Now()
 		tag.ModifiedTime = bson.Now()
-		c.Insert(tag)
-	} else if err != nil {
-		return err
-	} else {
-		oldtag.ArticleIds = append(oldtag.ArticleIds, tag.ArticleIds...)
-		removeDuplicate(&oldtag.ArticleIds)
-		oldtag.Count = len(oldtag.ArticleIds)
-		oldtag.ModifiedTime = bson.Now()
-		c.UpdateId(oldtag.Id_, oldtag)
+		Tags = append(Tags, *tag)
+		err = c.Insert(tag)
 	}
-	return nil
+	return err
 }
 
 type Subscription struct {

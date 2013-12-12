@@ -28,7 +28,6 @@ func (this *ArticleRouter) Get() {
 	}
 	data := MakeData(vars)
 
-	data.Flags.Single = true
 	this.Data["Data"] = data
 	this.Data["Article"] = article
 	this.Data["SameTagArticls"] = article.GetSameTagArticles(5)

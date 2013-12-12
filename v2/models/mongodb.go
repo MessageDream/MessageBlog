@@ -17,7 +17,8 @@ import (
 
 var (
 	DB         *mgo.Database
-	Categories []Category //常驻内存
+	Categories []Category   //常驻内存
+	Tags       []TagWrapper //常驻内存
 )
 
 func InitDb() {
@@ -37,10 +38,16 @@ func InitDb() {
 
 	DB = session.DB("messageblog")
 	SetAppCategories()
+	SetAppTags()
 }
 
 func SetAppCategories() {
 	Categories, _ = GetAllCategory()
+}
+
+func SetAppTags() {
+	tags, _ := GetAllTags()
+	Tags = *tags
 }
 
 func GetArticles(condition *bson.M, offset int, limit int, sort string) (*[]Article, int, error) {
@@ -55,12 +62,15 @@ func GetArticles(condition *bson.M, offset int, limit int, sort string) (*[]Arti
 	return &article, total, err
 }
 
-func GetArticlesByTag(condition *bson.M, offset int, limit int, sort string) (*[]Article, int, error) {
-	c := DB.C("tags")
+func GetArticlesByTag(tagname string, offset int, limit int, sort string) (*[]Article, int, error) {
 	var tag TagWrapper
-	err := c.Find(condition).One(&tag)
-	result, total, _ := GetArticles(&bson.M{"_id": bson.M{"$in": tag.ArticleIds}}, offset, limit, sort)
-	return result, total, err
+	for _, v := range Tags {
+		if tagname == v.Name {
+			tag = v
+			break
+		}
+	}
+	return GetArticles(&bson.M{"_id": bson.M{"$in": tag.ArticleIds}}, offset, limit, sort)
 }
 
 func GetArticlesByNode(condition *bson.M, offset int, limit int, sort string) (*[]Article, int, error) {
@@ -111,9 +121,7 @@ func GetAllTags() (*[]TagWrapper, error) {
 }
 
 func GetTagCount() int {
-	c := DB.C("tags")
-	total, _ := c.Count()
-	return total
+	return len(Tags)
 }
 
 func GetAllCategory() ([]Category, error) {

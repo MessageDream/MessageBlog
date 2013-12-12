@@ -10,9 +10,9 @@ import (
 	"../models"
 )
 
-import (
-	"labix.org/v2/mgo/bson"
-)
+// import (
+// 	"labix.org/v2/mgo/bson"
+// )
 
 type TagRouter struct {
 	baseRouter
@@ -25,7 +25,7 @@ func (this *TagRouter) Get() {
 	if err != nil {
 		page = 1
 	}
-	articles, total, err := models.GetArticlesByTag(&bson.M{"name": tagname}, (page-1)*limit, limit, "")
+	articles, total, err := models.GetArticlesByTag(tagname, (page-1)*limit, limit, "-createdtime")
 
 	if !this.CheckError(err) {
 		return
@@ -45,7 +45,6 @@ func (this *TagRouter) Get() {
 	vars["Pager"] = common.GetPager("tag/"+tagname, page, totalpage)
 	data := MakeData(vars)
 
-	data.Flags.Tag = true
 	this.Data["Data"] = data
 	this.Data["Articles"] = articles
 

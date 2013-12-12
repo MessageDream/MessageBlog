@@ -36,8 +36,7 @@ func (this *RootArticleRouter) Get() {
 
 		cat := models.Categories
 		this.Data["Category"] = cat
-		tags, _ := models.GetAllTags()
-		this.Data["Tags"] = tags
+		this.Data["Tags"] = models.Tags
 		//nodes := make([]NodeDetail, 0)
 
 		// for _, v := range cat {

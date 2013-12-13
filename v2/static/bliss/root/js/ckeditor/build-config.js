@@ -52,6 +52,7 @@ var CKBUILDER_CONFIG = {
 		'horizontalrule' : 1,
 		'iframe' : 1,
 		'wysiwygarea' : 1,
+		'highlight_js' : 1,
 		'image' : 1,
 		'imagebrowser' : 1,
 		'wpmore':1,

@@ -7,6 +7,9 @@ import (
 type User struct {
 	UserName string
 	Password string
+	EmailServer string
+	EmailSender string
+	EmailPwd string
 }
 
 type UploadConf struct {
@@ -49,6 +52,9 @@ func init() {
 		ManagerInfo: User{
 			UserName: beego.AppConfig.String("username"),
 			Password: beego.AppConfig.String("password"),
+			EmailServer: beego.AppConfig.String("emailserver"),
+			EmailSender: beego.AppConfig.String("emailsender"),
+			EmailPwd : beego.AppConfig.String("emailpwd"),
 		},
 		UploadConfig: UploadConf{
 			QiniuAccessKey: beego.AppConfig.String("qiniuaccesskey"),

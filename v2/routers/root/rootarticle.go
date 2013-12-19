@@ -1,7 +1,6 @@
 package root
 
 import (
-	//"log"
 	"html/template"
 	"strconv"
 )
@@ -17,6 +16,30 @@ import (
 
 type RootArticleRouter struct {
 	rootBaseRouter
+}
+
+func Publish(article *models.Article) {
+	edata := common.SubscribeEmail{
+		StaticUrl:  common.Webconfig.StaticURL,
+		WebUrl:     common.Webconfig.SiteURL,
+		MailSender: common.Webconfig.ManagerInfo.EmailSender,
+		Title:      (*article).Title,
+		Summary:    (*article).Summary,
+	}
+	var limit int
+	for {
+		offset := limit * 100
+		subs, total, _ := models.GetSubscribes(&bson.M{"status": true}, offset, 100, "")
+		for _, v := range *subs {
+			edata.Uid = v.Uid
+			content := common.PaseHtml(common.SubscribeEmailContent, edata)
+			common.SendMail(common.Webconfig.ManagerInfo.EmailSender, common.Webconfig.ManagerInfo.EmailPwd, common.Webconfig.ManagerInfo.EmailServer, v.Email, "北飘漂博客发表了新文章", *content, "html")
+		}
+		if offset+100 >= total {
+			break
+		}
+		limit++
+	}
 }
 
 func (this *RootArticleRouter) Get() {
@@ -124,6 +147,7 @@ func (this *RootArticleRouter) Post() {
 			}
 			article.SetSummary()
 			article.CreatArticle()
+			go Publish(&article)
 			this.Redirect("/root/article", 302)
 		}
 	}

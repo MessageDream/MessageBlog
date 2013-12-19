@@ -33,6 +33,7 @@ func main() {
 
 	beego.Router("/subscribe", &routers.SubscribeRouter{})
 	beego.Router(`/subscribe/:uid([\S]+)`, &routers.SubscribeRouter{})
+	beego.Router(`/desubscribe/:uid([\S]+)`, &routers.SubscribeRouter{})
 
 	beego.Router("/root", &root.RootMainRouter{})
 

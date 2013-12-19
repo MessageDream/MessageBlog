@@ -372,9 +372,9 @@ type Subscription struct {
 
 func (subscription *Subscription) Set() error {
 	c := DB.C("subscription")
-	sub := Subscription{}
+	var sub Subscription
 	err := c.Find(bson.M{"email": subscription.Email}).One(&sub)
-	if &sub == nil {
+	if err != nil {
 		subscription.Id_ = bson.NewObjectId()
 		err = c.Insert(subscription)
 	} else {
@@ -383,5 +383,17 @@ func (subscription *Subscription) Set() error {
 		sub.Uid = subscription.Uid
 		err = c.UpdateId(sub.Id_, sub)
 	}
+	return err
+}
+
+func (subscription *Subscription) UpdateState() error {
+	c := DB.C("subscription")
+	var sub Subscription
+	err := c.Find(bson.M{"uid": subscription.Uid}).One(&sub)
+	if err != nil {
+		return err
+	}
+	sub.Status = subscription.Status
+	err = c.UpdateId(sub.Id_, sub)
 	return err
 }

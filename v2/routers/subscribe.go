@@ -2,12 +2,20 @@ package routers
 
 import (
 	//"log"
+	//"fmt"
+	"html/template"
+	//"os"
 	"regexp"
+	"strings"
 )
 
 import (
 	"../common"
 	"../models"
+)
+
+import (
+	"github.com/astaxie/beego"
 )
 
 type SubscribeRouter struct {
@@ -21,8 +29,30 @@ type responsData struct {
 
 func (this *SubscribeRouter) Get() {
 	uid := this.Ctx.Input.Param(":uid")
-	this.Data["json"] = uid
-	this.ServeJson(true)
+	var t *template.Template
+	var err error
+	sub := models.Subscription{
+		Uid: uid,
+	}
+	if strings.Contains(this.Ctx.Request.URL.Path, "desubscribe") {
+		sub.Status = false
+		sub.UpdateState()
+		t, err = template.New("name").Parse(`您已成功取消订阅，北飘漂博客新的动态将不会发送到您的邮箱。`)
+	} else {
+		sub.Status = true
+		sub.UpdateState()
+		t, err = template.New("name").Parse(`恭喜，您已成功订阅北飘漂博客，博客的最新动态将会及时发送到您的邮箱。`)
+	}
+
+	if err != nil {
+		beego.Error(err)
+		return
+	}
+	err = t.Execute(this.Ctx.ResponseWriter, nil)
+	if err != nil {
+		beego.Error(err)
+		return
+	}
 }
 
 func (this *SubscribeRouter) Post() {
@@ -36,7 +66,13 @@ func (this *SubscribeRouter) Post() {
 			Status: false,
 		}
 		subscription.Set()
-		common.SendMail("zmlv1314@163.com", "zm119www744dff15", "smtp.163.com:25", email, "MessageDream 博客订阅", "123456", "text")
+		content := common.PaseHtml(common.SubConfirmContent, common.SubscribeEmail{
+			StaticUrl:  common.Webconfig.StaticURL,
+			WebUrl:     common.Webconfig.SiteURL,
+			Uid:        subscription.Uid,
+			MailSender: common.Webconfig.ManagerInfo.EmailSender,
+		})
+		common.SendMail(common.Webconfig.ManagerInfo.EmailSender, common.Webconfig.ManagerInfo.EmailPwd, common.Webconfig.ManagerInfo.EmailServer, email, "北飘漂订阅确认", *content, "html")
 		this.Data["json"] = responsData{
 			Status: "ok",
 		}

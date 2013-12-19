@@ -14,7 +14,7 @@
                                 <div style="height: 40px; width: 175px; margin: 0 auto;">
                                     <ul id="social-list">
                                         <li><a href="http://weibo.com/u/2017203357" target="_blank"><span class="sprite-round-icon-sina">新浪微博</span></a></li>
-                                        <li><a href="http://t.qq.com/adminsyskey" target="_blank"><span class="sprite-round-icon-qq">腾讯微博</span></a></li>
+                                        <li><a href="http://t.qq.com/messagedream" target="_blank"><span class="sprite-round-icon-qq">腾讯微博</span></a></li>
                                         <li><a href="#"><span class="sprite-round-icon-weixin">微信</span></a>
                                         </li>
                                     </ul>

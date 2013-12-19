@@ -165,6 +165,18 @@ func DeleteCategory(condition *bson.M) error {
 	return err
 }
 
+func GetSubscribes(condition *bson.M, offset int, limit int, sort string) (*[]Subscription, int, error) {
+	c := DB.C("subscription")
+	var subs []Subscription
+	query := c.Find(condition).Skip(offset).Limit(limit)
+	if sort != "" {
+		query = query.Sort(sort)
+	}
+	err := query.All(&subs)
+	total, _ := c.Find(condition).Count()
+	return &subs, total, err
+}
+
 func removeDuplicate(slis *[]bson.ObjectId) {
 	found := make(map[bson.ObjectId]bool)
 	j := 0

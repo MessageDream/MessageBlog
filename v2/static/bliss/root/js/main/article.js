@@ -26,21 +26,26 @@ var Articles;
                     _this.id_ = _thisbtn.parentElement.parentElement.children[0].textContent;
                     $.get("/root/article", { id: _this.id_ }, function (data) {
                        // $("#selectnode").val(data.NName)
-                        var opt= $("#selectnode option")
+                        var opt= $("#selectnode option");
                        for (var i = 0; i < opt.length; i++) {
                           if($(opt[i]).val()==data.NName){
                             var txt=$(opt[i]).text();
                             var li=$(".active-result")
                             for (var i = 0; i < li.length; i++) {
+                               $(li[i]).removeClass("result-selected");
                                if($(li[i]).text()==txt){
                                 $(li[i]).addClass("result-selected");
                                 $("a.chzn-single > span").text(txt)
+                                $(opt[i]).attr("selected","selected");
                                 break;
                                }
                             };
                             break;
                           } 
                        };
+                      // $("selectnode").trigger("liszt:updated");
+
+
                         $("#id").val(data.Id_)
                         $("#title").val(data.Title);
                         $("#name").val(data.Name);
@@ -53,7 +58,14 @@ var Articles;
                           //   $("#isThumbnail").attr("checked", "");
                         }
                         $("#featuredPicURL").val(data.FeaturedPicURL);
-                        $("#tags").val(data.Tags);
+
+                        $("#tags option").each(function(){
+                           if($.inArray($(this).val(),data.Tags)!=-1){
+                            $(this).attr("selected","selected")
+                          }
+                        });
+                        updateselect($("#tags"))
+
                         if($("#hidecontent").is(":hidden")) {
                             $("#expand").click();
                         }
@@ -81,6 +93,19 @@ var Articles;
         };
         return Article;
     })();
+
+    function updateselect(obj){
+        var selects = obj;
+        var selected = [];
+        selects.find("option").each(function() {
+            if (this.selected) {
+                selected[this.value] = this;
+            }
+        }).each(function() {
+            this.disabled = selected[this.value] && selected[this.value] !== this;
+        });
+        selects.trigger("liszt:updated");
+    }
     window.onload = function () {
         new Article(document.getElementsByClassName("btn btn-info")).gettoupdate();
         new Article(document.getElementsByClassName("btn btn-danger")).deletebyid();
@@ -97,19 +122,8 @@ var Articles;
             var postdata=$('#newTag').val();
              $.post("/root/tag", { title: postdata },function(data){
                         if(data==1){
-                         var def= $(".chzn-choices").children().last();
-                             var rel= $(".chzn-results").children("li").length;
                              $("#tags").append("<option selected value='"+postdata+"'>"+postdata+"</option>");
-                              var selects = $('#tags');
-                              var selected = [];
-                              selects.find("option").each(function() {
-                                  if (this.selected) {
-                                      selected[this.value] = this;
-                                  }
-                              }).each(function() {
-                                  this.disabled = selected[this.value] && selected[this.value] !== this;
-                              });
-                              selects.trigger("liszt:updated");
+                              updateselect($("#tags"));
                               $("#closetag").click();
                         }
                     });

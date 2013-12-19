@@ -1,6 +1,7 @@
 package common
 
 import (
+	"bytes"
 	"crypto/hmac"
 	"crypto/md5"
 	"crypto/rand"
@@ -17,6 +18,10 @@ import (
 	"time"
 )
 
+import (
+	"github.com/astaxie/beego"
+)
+
 type KeyValuePair struct {
 	Key   int64
 	Value string
@@ -24,6 +29,276 @@ type KeyValuePair struct {
 
 type KeyPairs struct {
 	Items []*KeyValuePair
+}
+
+var SubscribeEmailContent string = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="IE=11.0000"
+          http-equiv="X-UA-Compatible">
+    <title>
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="goolgebot" content="noindex, nofollow, noarchive">
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-size: 11px;
+            font-family: Verdana,Sans-Serif,Tahoma,helviteca;
+            background-color: #f8f8f8;
+            overflow: visible;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bl_author_img {
+            text-align: center;
+            left: 50%;
+            margin-top: 35px;
+            top: -45px;
+            overflow: hidden;
+            -moz-border-radius: 500px;
+            -webkit-border-radius: 500px;
+            border-radius: 500px;
+            width: 90px;
+            background: #fff;
+            padding: 5px;
+        }
+
+        .bl_author_bio {
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-bottom: 15px;
+            color: #333;
+        }
+
+        .widget-body .bl_author_img img {
+            -moz-border-radius: 500px;
+            -webkit-border-radius: 500px;
+            border-radius: 500px;
+            height: 90px;
+            max-width: none;
+            width: 90px;
+        }
+    </style>
+
+    <meta name="GENERATOR" content="MSHTML 11.00.9600.16476">
+</head>
+<body>
+    <div id="divEmailBody" style="padding: 10px; width: 100%; height: 100%; overflow: auto; font-size: 12px;">
+        <div id="divEmail">
+            <center>
+                <div style="margin: 0px auto; padding: 0px; width: 705px; height: auto;">
+                    <h1 style="background: rgb(199, 199, 199); margin: 0px; padding: 0px; border-radius: 5px 5px 0px 0px; height: 35px; color: rgb(255, 255, 255); line-height: 35px; font-size: 14px;">感谢您一直以来的支持</h1>
+                    <h2 style="background: rgb(41, 43, 40); margin: 0px; padding: 0px; height: 100px; text-align: center; line-height: 120px; font-size: 36px;">
+                        <a style="text-decoration: none;" href="{{.WebUrl}}">
+                            <font style="color: rgb(255, 0, 102);">北</font><font style="color: rgb(255, 255, 102);">飘</font><font style="color: rgb(102, 255, 204);">漂</font>
+                        </a>
+                    </h2>
+                    <h1 style="background: rgb(41, 43, 40); height: 50px; margin: 0px; padding: 0px; text-align: center; font-size: 12px; ">
+                        <small>
+                            <font style="color: rgb(255, 0, 102);">
+                                一个乐于分享| .Net | C/C++ | Golang | TypeScript | NoSql | linux |等技术的IT博客
+                            </font>
+                        </small>
+                    </h1>
+                    <div style="margin: 0px; padding: 0px; width: 705px; height:auto; overflow: hidden;">
+                        <div style="background: rgb(240, 240, 240); margin: 0px; padding: 0px; width: 187px; height: auto; text-align: center; float: left;">
+                            <div class="widget-body">
+                                <center>
+                                    <div class="bl_author_img">
+                                        <img src="{{.StaticUrl}}/static/bliss/img/messagedream.jpg">
+                                    </div>
+                                </center>
+                                <div class="bl_author_bio">
+                                    <h3>MessageDream</h3>
+                                    <p class="muted">敢于尝试新东西，勇于面对新挑战。</p>
+                                    <span><a href="http://weibo.com/u/2017203357" target="_blank"><span class="sprite-round-icon-sina">新浪微博</span></a></span><br />
+                                    <span><a href="http://t.qq.com/messagedream" target="_blank"><span class="sprite-round-icon-qq">腾讯微博</span></a></span>
+                                </div>
+                                <p></p>
+                            </div>
+                        </div><div style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; width: 518px; height: auto; float: right;">
+                            <h3 style="margin: 0px;">&nbsp; </h3>
+                            <h3 style="margin: 0px;">
+                                <font color="#808080">
+                                    <a style="text-decoration: none;"
+                                       href="">
+                                        &nbsp;
+                                        <font color="#808080">{{.Title}}</font>
+                                    </a>
+                                </font>
+                            </h3>
+                            <h3 style="margin: 0px;">&nbsp;</h3>
+                            <div style="margin: 0px auto 15px; padding: 0px 0px 15px; width: 415px; overflow: hidden; border-bottom-color: rgb(176, 176, 176); border-bottom-width: 1px; border-bottom-style: dotted;">
+                                {{.Summary}}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 0px; padding: 25px 0px 0px; border-radius: 0px 0px 6px 6px; width: 705px; height: 90px; color: rgb(237, 237, 237); background-color: rgb(199, 199, 199); -moz-border-radius: 0px 0px 6px 6px; -webkit-border-radius: 0px 0px 6px 6px;">
+                        <p style="margin: 0px; padding: 0px; text-align: center; color: rgb(237, 237, 237); line-height: 25px; font-family: Microsoft yahei; font-size: 12px;">感谢您阅读本期邮件，若不想收到此邮件，请点击<a style="margin: 0px 5px; color: rgb(255, 255, 255); font-family: Microsoft yahei; font-size: 12px; text-decoration: none;" href="{{.WebUrl}}/desubscribe/{{.Uid}}">退订</a></p>
+                        <p style="margin: 0px; padding: 0px; text-align: center; line-height: 25px;">
+                            <a style="color: rgb(237, 237, 237); font-family: Microsoft yahei; font-size: 12px; text-decoration: none;"
+                               href="mailto:{{.MailSender}}">mailto:{{.MailSender}}</a>
+                        </p>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </div>
+</body>
+</html>
+`
+var SubConfirmContent string = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="IE=11.0000"
+          http-equiv="X-UA-Compatible">
+    <title>北飘漂博客订阅确认</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="goolgebot" content="noindex, nofollow, noarchive">
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-size: 11px;
+            font-family: Verdana,Sans-Serif,Tahoma,helviteca;
+            background-color: #f8f8f8;
+            overflow: visible;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bl_author_img {
+            text-align: center;
+            left: 50%;
+            margin-top: 35px;
+            top: -45px;
+            overflow: hidden;
+            -moz-border-radius: 500px;
+            -webkit-border-radius: 500px;
+            border-radius: 500px;
+            width: 90px;
+            background: #fff;
+            padding: 5px;
+        }
+
+        .bl_author_bio {
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-bottom: 15px;
+            color: #333;
+        }
+
+        .widget-body .bl_author_img img {
+            -moz-border-radius: 500px;
+            -webkit-border-radius: 500px;
+            border-radius: 500px;
+            height: 90px;
+            max-width: none;
+            width: 90px;
+        }
+    </style>
+
+    <meta name="GENERATOR" content="MSHTML 11.00.9600.16476">
+</head>
+<body>
+    <div id="divEmailBody" style="padding: 10px; width: 100%; height: 100%; overflow: auto; font-size: 12px;">
+        <div id="divEmail">
+            <center>
+                <div style="margin: 0px auto; padding: 0px; width: 705px; height: auto;">
+                    <h1 style="background: rgb(199, 199, 199); margin: 0px; padding: 0px; border-radius: 5px 5px 0px 0px; height: 35px; color: rgb(255, 255, 255); line-height: 35px; font-size: 14px;"></h1>
+                    <h2 style="background: rgb(41, 43, 40); margin: 0px; padding: 0px; height: 100px; text-align: center; line-height: 120px; font-size: 36px;">
+                        <a style="text-decoration: none;" href="{{.WebUrl}}">
+                            <font style="color: rgb(255, 0, 102);">北</font><font style="color: rgb(255, 255, 102);">飘</font><font style="color: rgb(102, 255, 204);">漂</font>
+                        </a>
+                    </h2>
+                    <h1 style="background: rgb(41, 43, 40); height: 50px; margin: 0px; padding: 0px; text-align: center; font-size: 12px; ">
+                        <small>
+                            <font style="color: rgb(255, 0, 102);">
+                                一个乐于分享| .Net | C/C++ | Golang | TypeScript | NoSql | linux |等技术的IT博客
+                            </font>
+                        </small>
+                    </h1>
+                    <div style="margin: 0px; padding: 0px; width: 705px; height:auto; overflow: hidden;">
+                        <div style="background: rgb(240, 240, 240); margin: 0px; padding: 0px; width: 187px; height: auto; text-align: center; float: left;">
+                            <div class="widget-body">
+                                <center>
+                                    <div class="bl_author_img">
+                                        <img src="{{.StaticUrl}}/static/bliss/img/messagedream.jpg">
+                                    </div>
+                                </center>
+                                <div class="bl_author_bio">
+                                    <h3>MessageDream</h3>
+                                    <p class="muted">敢于尝试新东西，勇于面对新挑战。</p>
+                                    <span><a href="http://weibo.com/u/2017203357" target="_blank"><span class="sprite-round-icon-sina">新浪微博</span></a></span><br />
+                                    <span><a href="http://t.qq.com/messagedream" target="_blank"><span class="sprite-round-icon-qq">腾讯微博</span></a></span>
+                                </div>
+                                <p></p>
+                            </div>
+                        </div><div style="background: rgb(255, 255, 255); margin: 0px; padding: 0px; width: 518px; height: auto; float: right;">
+                            <h3 style="margin: 0px;">&nbsp; </h3>
+                            <h3 style="margin: 0px;">
+                                <font color="#808080">
+                                    <a style="text-decoration: none;"
+                                       href="{{.WebUrl}}">
+                                        &nbsp;
+                                        <font color="#808080">感谢您订阅北飘漂博客</font>
+                                    </a>
+                                </font>
+                            </h3>
+                            <h3 style="margin: 0px;">&nbsp;</h3>
+                            <div style="margin: 0px auto 15px; padding: 0px 0px 15px; width: 415px; overflow: hidden; border-bottom-color: rgb(176, 176, 176); border-bottom-width: 1px; border-bottom-style: dotted;">
+                                <p> 请点击以下链接确认:</p>
+                                <p><a href="{{.WebUrl}}/subscribe/{{.Uid}}">{{.WebUrl}}/subscribe/{{.Uid}}</a></p>
+                                <p> 若您没有发送过订阅需求，请忽略。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 0px; padding: 25px 0px 0px; border-radius: 0px 0px 6px 6px; width: 705px; height: 90px; color: rgb(237, 237, 237); background-color: rgb(199, 199, 199); -moz-border-radius: 0px 0px 6px 6px; -webkit-border-radius: 0px 0px 6px 6px;">
+                        <p style="margin: 0px; padding: 0px; text-align: center; color: rgb(237, 237, 237); line-height: 25px; font-family: Microsoft yahei; font-size: 12px;">若您没有发送过订阅需求，请忽略。</p>
+                        <p style="margin: 0px; padding: 0px; text-align: center; line-height: 25px;">
+                            <a style="color: rgb(237, 237, 237); font-family: Microsoft yahei; font-size: 12px; text-decoration: none;"
+                               href="mailto:{{.MailSender}}">mailto:{{.MailSender}}</a>
+                        </p>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </div>
+</body>
+</html>
+`
+
+type SubscribeEmail struct {
+	StaticUrl  string
+	Title      string
+	Summary    template.HTML
+	WebUrl     string
+	Uid        string
+	MailSender string
+}
+
+func PaseHtml(content string, data interface{}) *string {
+	t, err := template.New("name").Parse(content)
+	if err != nil {
+		beego.Error(err)
+		return nil
+	}
+	buf := bytes.NewBuffer(make([]byte, 0))
+	err = t.Execute(buf, data)
+	if err != nil {
+		beego.Error(err)
+		return nil
+	}
+
+	ht := buf.String()
+	return &ht
 }
 
 func (kp KeyPairs) Len() int {

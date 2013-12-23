@@ -126,7 +126,7 @@ var SubscribeEmailContent string = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01
                             <h3 style="margin: 0px;">
                                 <font color="#808080">
                                     <a style="text-decoration: none;"
-                                       href="">
+                                       href="{{.WebUrl}}/article/{{.ArticleName}}">
                                         &nbsp;
                                         <font color="#808080">{{.Title}}</font>
                                     </a>
@@ -134,8 +134,12 @@ var SubscribeEmailContent string = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01
                             </h3>
                             <h3 style="margin: 0px;">&nbsp;</h3>
                             <div style="margin: 0px auto 15px; padding: 0px 0px 15px; width: 415px; overflow: hidden; border-bottom-color: rgb(176, 176, 176); border-bottom-width: 1px; border-bottom-style: dotted;">
-                                {{.Summary}}
+                                {{.Summary}} 
+                                <a style="FONT-SIZE: 12px; TEXT-DECORATION: none; FONT-FAMILY: Microsoft yahei;" target="_blank" href="{{.WebUrl}}/article/{{.ArticleName}}">
+                                 <font color="#2f82de">查看全部>></font>
+                                </a>
                             </div>
+                            
                         </div>
                     </div>
                     <div style="margin: 0px; padding: 25px 0px 0px; border-radius: 0px 0px 6px 6px; width: 705px; height: 90px; color: rgb(237, 237, 237); background-color: rgb(199, 199, 199); -moz-border-radius: 0px 0px 6px 6px; -webkit-border-radius: 0px 0px 6px 6px;">
@@ -276,12 +280,13 @@ var SubConfirmContent string = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Tra
 `
 
 type SubscribeEmail struct {
-	StaticUrl  string
-	Title      string
-	Summary    template.HTML
-	WebUrl     string
-	Uid        string
-	MailSender string
+	StaticUrl   string
+	Title       string
+	ArticleName string
+	Summary     template.HTML
+	WebUrl      string
+	Uid         string
+	MailSender  string
 }
 
 func PaseHtml(content string, data interface{}) *string {

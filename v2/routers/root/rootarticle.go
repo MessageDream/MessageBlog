@@ -20,11 +20,12 @@ type RootArticleRouter struct {
 
 func Publish(article *models.Article) {
 	edata := common.SubscribeEmail{
-		StaticUrl:  common.Webconfig.StaticURL,
-		WebUrl:     common.Webconfig.SiteURL,
-		MailSender: common.Webconfig.ManagerInfo.EmailSender,
-		Title:      (*article).Title,
-		Summary:    (*article).Summary,
+		StaticUrl:   common.Webconfig.StaticURL,
+		WebUrl:      common.Webconfig.SiteURL,
+		MailSender:  common.Webconfig.ManagerInfo.EmailSender,
+		Title:       (*article).Title,
+		ArticleName: (*article).Name,
+		Summary:     (*article).Summary,
 	}
 	var limit int
 	for {

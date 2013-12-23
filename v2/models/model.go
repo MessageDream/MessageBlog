@@ -360,6 +360,8 @@ func (tag *TagWrapper) SetTag() error {
 		Tags = append(Tags, *tag)
 		err = c.Insert(tag)
 	}
+
+	SetAppTags()
 	return err
 }
 

@@ -4,7 +4,7 @@
     <div class="row-fluid top-banner">
         <div class="container">
             <div class="banner-overlay"></div>
-            <a class="brand brand-image" href="{{$config.SiteURL}}" title="北京飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术" rel="home">
+            <a class="brand brand-image" href="{{$config.SiteURL}}" title="北飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术" rel="home">
                 <img src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/img/logo.png" alt="北京飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术"><h1><small>一个乐于分享| .Net | C/C++ | Golang | TypeScript | NoSql | linux |等技术的IT博客</small></h1>
             </a>
             <div class="top-banner-social pull-right"></div>
@@ -13,8 +13,8 @@
     <div class="row-fluid bluth-navigation">
         <div class="container">
             <div class="mini-logo">
-                <a class="mini mini-image" href="{{$config.SiteURL}}" title="北京飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术" rel="home">
-                    <img src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/img/logo_normal.png" alt="北京飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术"></a>
+                <a class="mini mini-image" href="{{$config.SiteURL}}" title="北飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术" rel="home">
+                    <img src="{{$config.StaticURL}}/static/{{$config.ThemeName}}/img/logo_normal.png" alt="北飘漂—.Net,C#,C/C++,Golang,TypeScript,NoSql,Linux等开发技术"></a>
             </div>
             <div class="navbar navbar-inverse">
                 <div class="navbar-inner">

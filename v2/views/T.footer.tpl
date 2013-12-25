@@ -6,7 +6,7 @@
                     <div id="text-6" class="span3 widget_text">
                         <h3 class="widget-head">博客介绍</h3>
                         <div class="textwidget">
-                            <div style="color: #45B0EE;">北京飘漂是一个乐于分享| .Net | C/C++ | Golang | TypeScript | NoSql | linux |等技术的IT博客</div>
+                            <div style="color: #45B0EE;">北飘漂是一个乐于分享| .Net | C/C++ | Golang | TypeScript | NoSql | linux |等技术的IT博客</div>
                             <br>
                              <!--<div style="color: #45B0EE;">
                                 如果您觉得博客的内容对您的学习有所帮助：<a href="http://me.alipay.com/tystudio">

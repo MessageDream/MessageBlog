@@ -16,7 +16,10 @@
                      {{$innode:=.GetNode}}	
                      <li>
                          <a href="{{$siteURL}}/node/{{$innode.Name}}" title="查看所有文章在 {{$innode.Title}}">{{$innode.Title}}</a>
-                     </li>                      
+                     </li>
+                     <li class="divider">/</li>
+                     <li>浏览:{{.Views}}
+                     </li>                   
                      <li class="divider">/</li>
                      <li><a href="{{$siteURL}}/article/{{.Name}}#disqus_thread"></a>
                      </li>

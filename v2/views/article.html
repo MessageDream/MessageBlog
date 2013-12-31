@@ -18,7 +18,14 @@
                          <a href="{{$siteURL}}/node/{{$innode.Name}}" title="查看所有文章在 {{$innode.Title}}">{{$innode.Title}}</a>
                      </li>                      
                      <li class="divider">/</li>
+                     <li>浏览:{{.Views}}
+                     </li>
+                     <li class="divider">/</li>
                      <li><a href="{{$siteURL}}/article/{{.Name}}#disqus_thread"></a>
+                     </li>
+                     <li class="divider">/</li>
+                     <li>
+                         <div class="bdsharebuttonbox" data-tag="share_2"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a></div>
                      </li>
                  </ul>
              </div>
@@ -32,7 +39,7 @@
                  <footer class="entry-meta clearfix">
                     <ul></ul>
                  </footer>
-				<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+				<div class="bdsharebuttonbox" data-tag="share_1"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
             </div>
          </div>
      </article>

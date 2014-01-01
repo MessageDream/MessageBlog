@@ -170,7 +170,7 @@ func (article *Article) HasSummary() bool {
 }
 
 func (article *Article) UpdateViews() {
-	article.Views += 1
+	article.Views ++
 	article.UpdateArticle()
 }
 

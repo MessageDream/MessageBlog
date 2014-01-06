@@ -60,7 +60,7 @@
             </div>
             <!-- .site-info -->
             <div class="row-fluid" id="footer-bottom">
-                <span>Copyright © 2013 </span><a href="{{$config.SiteURL}}">{{$config.SiteTitle}}</a> <span>All Rights Reserved. Powered By&nbsp;&nbsp;<a href="http://golang.org/" target="_blank">Golang</a>&nbsp;&nbsp;and&nbsp;&nbsp;<a href="http://www.mongodb.org/" target="_blank">MongoDB</a>&nbsp;&nbsp;静态文件和图片存储由<a href="https://portal.qiniu.com" target="_blank">七牛云存储</a>提供
+                <span>Copyright&nbsp;&nbsp;©&nbsp;&nbsp;2014&nbsp;&nbsp;</span><a href="{{$config.SiteURL}}">{{$config.SiteTitle}}</a> <span>&nbsp;&nbsp;京ICP备14000585号-1&nbsp;|&nbsp;Powered By&nbsp;&nbsp;<a href="http://golang.org/" target="_blank">Golang</a>&nbsp;&nbsp;and&nbsp;&nbsp;<a href="http://www.mongodb.org/" target="_blank">MongoDB</a>&nbsp;&nbsp;静态文件和图片存储由<a href="https://portal.qiniu.com" target="_blank">七牛云存储</a>提供
                     <div style="float: right; margin-right: 30px">
                         <div id="clicki_widget_5773" style="display: inline;">
                             <a href="http://www.clicki.cn/" target="_blank" style="display: inline; text-decoration: none; border: none; padding: 0; margin: 0;">

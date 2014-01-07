@@ -64,21 +64,21 @@ $(document).ready(function(){
 	});
 	
 	//ajaxify menus
-	$('a.ajax-link').click(function(e){
-		if($.browser.msie) e.which=1;
-		if(e.which!=1 || !$('#is-ajax').prop('checked') || $(this).parent().hasClass('active')) return;
-		e.preventDefault();
-		if($('.btn-navbar').is(':visible'))
-		{
-			$('.btn-navbar').click();
-		}
-		$('#loading').remove();
-		$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
-		var $clink=$(this);
-		History.pushState(null, null, $clink.attr('href'));
-		$('ul.main-menu li.active').removeClass('active');
-		$clink.parent('li').addClass('active');	
-	});
+	// $('a.ajax-link').click(function(e){
+	// 	if($.browser.msie) e.which=1;
+	// 	if(e.which!=1 || !$('#is-ajax').prop('checked') || $(this).parent().hasClass('active')) return;
+	// 	e.preventDefault();
+	// 	if($('.btn-navbar').is(':visible'))
+	// 	{
+	// 		$('.btn-navbar').click();
+	// 	}
+	// 	$('#loading').remove();
+	// 	$('#content').fadeOut().parent().append('<div id="loading" class="center">Loading...<div class="center"></div></div>');
+	// 	var $clink=$(this);
+	// 	History.pushState(null, null, $clink.attr('href'));
+	// 	$('ul.main-menu li.active').removeClass('active');
+	// 	$clink.parent('li').addClass('active');	
+	// });
 	
 	//animating menus on hover
 	$('ul.main-menu li:not(.nav-header)').hover(function(){
@@ -100,7 +100,7 @@ function docReady(){
 	});
 	
 	//rich text editor
-	$('.cleditor').cleditor();
+	//$('.cleditor').cleditor();
 	
 	//datepicker
 	$('.datepicker').datepicker();
@@ -154,7 +154,7 @@ function docReady(){
 	}).elfinder('instance');
 
 	//iOS / iPhone style toggle switch
-	$('.iphone-toggle').iphoneStyle();
+	//$('.iphone-toggle').iphoneStyle();
 
 	//star rating
 	$('.raty').raty({
@@ -162,11 +162,11 @@ function docReady(){
 	});
 
 	//uploadify - multiple uploads
-	$('#file_upload').uploadify({
-		'swf'      : 'misc/uploadify.swf',
-		'uploader' : 'misc/uploadify.php'
-		// Put your options here
-	});
+	// $('#file_upload').uploadify({
+	// 	'swf'      : 'misc/uploadify.swf',
+	// 	'uploader' : 'misc/uploadify.php'
+	// 	// Put your options here
+	// });
 
 	//gallery controlls container animation
 	$('ul.gallery li').hover(function(){
@@ -200,7 +200,7 @@ function docReady(){
 	});
 
 	//gallery colorbox
-	$('.thumbnail a').colorbox({rel:'thumbnail a', transition:"elastic", maxWidth:"95%", maxHeight:"95%"});
+	//$('.thumbnail a').colorbox({rel:'thumbnail a', transition:"elastic", maxWidth:"95%", maxHeight:"95%"});
 
 	//gallery fullscreen
 	$('#toggle-fullscreen').button().click(function () {
@@ -308,38 +308,38 @@ function docReady(){
 
 
 	//initialize the calendar
-	$('#calendar').fullCalendar({
-		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
-		},
-		editable: true,
-		droppable: true, // this allows things to be dropped onto the calendar !!!
-		drop: function(date, allDay) { // this function is called when something is dropped
+	// $('#calendar').fullCalendar({
+	// 	header: {
+	// 		left: 'prev,next today',
+	// 		center: 'title',
+	// 		right: 'month,agendaWeek,agendaDay'
+	// 	},
+	// 	editable: true,
+	// 	droppable: true, // this allows things to be dropped onto the calendar !!!
+	// 	drop: function(date, allDay) { // this function is called when something is dropped
 		
-			// retrieve the dropped element's stored Event Object
-			var originalEventObject = $(this).data('eventObject');
+	// 		// retrieve the dropped element's stored Event Object
+	// 		var originalEventObject = $(this).data('eventObject');
 			
-			// we need to copy it, so that multiple events don't have a reference to the same object
-			var copiedEventObject = $.extend({}, originalEventObject);
+	// 		// we need to copy it, so that multiple events don't have a reference to the same object
+	// 		var copiedEventObject = $.extend({}, originalEventObject);
 			
-			// assign it the date that was reported
-			copiedEventObject.start = date;
-			copiedEventObject.allDay = allDay;
+	// 		// assign it the date that was reported
+	// 		copiedEventObject.start = date;
+	// 		copiedEventObject.allDay = allDay;
 			
-			// render the event on the calendar
-			// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-			$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+	// 		// render the event on the calendar
+	// 		// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+	// 		$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 			
-			// is the "remove after drop" checkbox checked?
-			if ($('#drop-remove').is(':checked')) {
-				// if so, remove the element from the "Draggable Events" list
-				$(this).remove();
-			}
+	// 		// is the "remove after drop" checkbox checked?
+	// 		if ($('#drop-remove').is(':checked')) {
+	// 			// if so, remove the element from the "Draggable Events" list
+	// 			$(this).remove();
+	// 		}
 			
-		}
-	});
+	// 	}
+	// });
 	
 	
 	//chart with points
@@ -409,291 +409,291 @@ function docReady(){
 		});
 	}
 	
-	//flot chart
-	if($("#flotchart").length)
-	{
-		var d1 = [];
-		for (var i = 0; i < Math.PI * 2; i += 0.25)
-			d1.push([i, Math.sin(i)]);
+// 	//flot chart
+// 	if($("#flotchart").length)
+// 	{
+// 		var d1 = [];
+// 		for (var i = 0; i < Math.PI * 2; i += 0.25)
+// 			d1.push([i, Math.sin(i)]);
 		
-		var d2 = [];
-		for (var i = 0; i < Math.PI * 2; i += 0.25)
-			d2.push([i, Math.cos(i)]);
+// 		var d2 = [];
+// 		for (var i = 0; i < Math.PI * 2; i += 0.25)
+// 			d2.push([i, Math.cos(i)]);
 
-		var d3 = [];
-		for (var i = 0; i < Math.PI * 2; i += 0.1)
-			d3.push([i, Math.tan(i)]);
+// 		var d3 = [];
+// 		for (var i = 0; i < Math.PI * 2; i += 0.1)
+// 			d3.push([i, Math.tan(i)]);
 		
-		$.plot($("#flotchart"), [
-			{ label: "sin(x)",  data: d1},
-			{ label: "cos(x)",  data: d2},
-			{ label: "tan(x)",  data: d3}
-		], {
-			series: {
-				lines: { show: true },
-				points: { show: true }
-			},
-			xaxis: {
-				ticks: [0, [Math.PI/2, "\u03c0/2"], [Math.PI, "\u03c0"], [Math.PI * 3/2, "3\u03c0/2"], [Math.PI * 2, "2\u03c0"]]
-			},
-			yaxis: {
-				ticks: 10,
-				min: -2,
-				max: 2
-			},
-			grid: {
-				backgroundColor: { colors: ["#fff", "#eee"] }
-			}
-		});
-	}
+// 		$.plot($("#flotchart"), [
+// 			{ label: "sin(x)",  data: d1},
+// 			{ label: "cos(x)",  data: d2},
+// 			{ label: "tan(x)",  data: d3}
+// 		], {
+// 			series: {
+// 				lines: { show: true },
+// 				points: { show: true }
+// 			},
+// 			xaxis: {
+// 				ticks: [0, [Math.PI/2, "\u03c0/2"], [Math.PI, "\u03c0"], [Math.PI * 3/2, "3\u03c0/2"], [Math.PI * 2, "2\u03c0"]]
+// 			},
+// 			yaxis: {
+// 				ticks: 10,
+// 				min: -2,
+// 				max: 2
+// 			},
+// 			grid: {
+// 				backgroundColor: { colors: ["#fff", "#eee"] }
+// 			}
+// 		});
+// 	}
 	
-	//stack chart
-	if($("#stackchart").length)
-	{
-		var d1 = [];
-		for (var i = 0; i <= 10; i += 1)
-		d1.push([i, parseInt(Math.random() * 30)]);
+// 	//stack chart
+// 	if($("#stackchart").length)
+// 	{
+// 		var d1 = [];
+// 		for (var i = 0; i <= 10; i += 1)
+// 		d1.push([i, parseInt(Math.random() * 30)]);
 
-		var d2 = [];
-		for (var i = 0; i <= 10; i += 1)
-			d2.push([i, parseInt(Math.random() * 30)]);
+// 		var d2 = [];
+// 		for (var i = 0; i <= 10; i += 1)
+// 			d2.push([i, parseInt(Math.random() * 30)]);
 
-		var d3 = [];
-		for (var i = 0; i <= 10; i += 1)
-			d3.push([i, parseInt(Math.random() * 30)]);
+// 		var d3 = [];
+// 		for (var i = 0; i <= 10; i += 1)
+// 			d3.push([i, parseInt(Math.random() * 30)]);
 
-		var stack = 0, bars = true, lines = false, steps = false;
+// 		var stack = 0, bars = true, lines = false, steps = false;
 
-		function plotWithOptions() {
-			$.plot($("#stackchart"), [ d1, d2, d3 ], {
-				series: {
-					stack: stack,
-					lines: { show: lines, fill: true, steps: steps },
-					bars: { show: bars, barWidth: 0.6 }
-				}
-			});
-		}
+// 		function plotWithOptions() {
+// 			$.plot($("#stackchart"), [ d1, d2, d3 ], {
+// 				series: {
+// 					stack: stack,
+// 					lines: { show: lines, fill: true, steps: steps },
+// 					bars: { show: bars, barWidth: 0.6 }
+// 				}
+// 			});
+// 		}
 
-		plotWithOptions();
+// 		plotWithOptions();
 
-		$(".stackControls input").click(function (e) {
-			e.preventDefault();
-			stack = $(this).val() == "With stacking" ? true : null;
-			plotWithOptions();
-		});
-		$(".graphControls input").click(function (e) {
-			e.preventDefault();
-			bars = $(this).val().indexOf("Bars") != -1;
-			lines = $(this).val().indexOf("Lines") != -1;
-			steps = $(this).val().indexOf("steps") != -1;
-			plotWithOptions();
-		});
-	}
+// 		$(".stackControls input").click(function (e) {
+// 			e.preventDefault();
+// 			stack = $(this).val() == "With stacking" ? true : null;
+// 			plotWithOptions();
+// 		});
+// 		$(".graphControls input").click(function (e) {
+// 			e.preventDefault();
+// 			bars = $(this).val().indexOf("Bars") != -1;
+// 			lines = $(this).val().indexOf("Lines") != -1;
+// 			steps = $(this).val().indexOf("steps") != -1;
+// 			plotWithOptions();
+// 		});
+// 	}
 
-	//pie chart
-	var data = [
-	{ label: "Internet Explorer",  data: 12},
-	{ label: "Mobile",  data: 27},
-	{ label: "Safari",  data: 85},
-	{ label: "Opera",  data: 64},
-	{ label: "Firefox",  data: 90},
-	{ label: "Chrome",  data: 112}
-	];
+// 	//pie chart
+// 	var data = [
+// 	{ label: "Internet Explorer",  data: 12},
+// 	{ label: "Mobile",  data: 27},
+// 	{ label: "Safari",  data: 85},
+// 	{ label: "Opera",  data: 64},
+// 	{ label: "Firefox",  data: 90},
+// 	{ label: "Chrome",  data: 112}
+// 	];
 	
-	if($("#piechart").length)
-	{
-		$.plot($("#piechart"), data,
-		{
-			series: {
-					pie: {
-							show: true
-					}
-			},
-			grid: {
-					hoverable: true,
-					clickable: true
-			},
-			legend: {
-				show: false
-			}
-		});
+// 	if($("#piechart").length)
+// 	{
+// 		$.plot($("#piechart"), data,
+// 		{
+// 			series: {
+// 					pie: {
+// 							show: true
+// 					}
+// 			},
+// 			grid: {
+// 					hoverable: true,
+// 					clickable: true
+// 			},
+// 			legend: {
+// 				show: false
+// 			}
+// 		});
 		
-		function pieHover(event, pos, obj)
-		{
-			if (!obj)
-					return;
-			percent = parseFloat(obj.series.percent).toFixed(2);
-			$("#hover").html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
-		}
-		$("#piechart").bind("plothover", pieHover);
-	}
+// 		function pieHover(event, pos, obj)
+// 		{
+// 			if (!obj)
+// 					return;
+// 			percent = parseFloat(obj.series.percent).toFixed(2);
+// 			$("#hover").html('<span style="font-weight: bold; color: '+obj.series.color+'">'+obj.series.label+' ('+percent+'%)</span>');
+// 		}
+// 		$("#piechart").bind("plothover", pieHover);
+// 	}
 	
-	//donut chart
-	if($("#donutchart").length)
-	{
-		$.plot($("#donutchart"), data,
-		{
-				series: {
-						pie: {
-								innerRadius: 0.5,
-								show: true
-						}
-				},
-				legend: {
-					show: false
-				}
-		});
-	}
+// 	//donut chart
+// 	if($("#donutchart").length)
+// 	{
+// 		$.plot($("#donutchart"), data,
+// 		{
+// 				series: {
+// 						pie: {
+// 								innerRadius: 0.5,
+// 								show: true
+// 						}
+// 				},
+// 				legend: {
+// 					show: false
+// 				}
+// 		});
+// 	}
 
 
 
 
-	 // we use an inline data source in the example, usually data would
-	// be fetched from a server
-	var data = [], totalPoints = 300;
-	function getRandomData() {
-		if (data.length > 0)
-			data = data.slice(1);
+// 	 // we use an inline data source in the example, usually data would
+// 	// be fetched from a server
+// 	var data = [], totalPoints = 300;
+// 	function getRandomData() {
+// 		if (data.length > 0)
+// 			data = data.slice(1);
 
-		// do a random walk
-		while (data.length < totalPoints) {
-			var prev = data.length > 0 ? data[data.length - 1] : 50;
-			var y = prev + Math.random() * 10 - 5;
-			if (y < 0)
-				y = 0;
-			if (y > 100)
-				y = 100;
-			data.push(y);
-		}
+// 		// do a random walk
+// 		while (data.length < totalPoints) {
+// 			var prev = data.length > 0 ? data[data.length - 1] : 50;
+// 			var y = prev + Math.random() * 10 - 5;
+// 			if (y < 0)
+// 				y = 0;
+// 			if (y > 100)
+// 				y = 100;
+// 			data.push(y);
+// 		}
 
-		// zip the generated y values with the x values
-		var res = [];
-		for (var i = 0; i < data.length; ++i)
-			res.push([i, data[i]])
-		return res;
-	}
+// 		// zip the generated y values with the x values
+// 		var res = [];
+// 		for (var i = 0; i < data.length; ++i)
+// 			res.push([i, data[i]])
+// 		return res;
+// 	}
 
-	// setup control widget
-	var updateInterval = 30;
-	$("#updateInterval").val(updateInterval).change(function () {
-		var v = $(this).val();
-		if (v && !isNaN(+v)) {
-			updateInterval = +v;
-			if (updateInterval < 1)
-				updateInterval = 1;
-			if (updateInterval > 2000)
-				updateInterval = 2000;
-			$(this).val("" + updateInterval);
-		}
-	});
+// 	// setup control widget
+// 	var updateInterval = 30;
+// 	$("#updateInterval").val(updateInterval).change(function () {
+// 		var v = $(this).val();
+// 		if (v && !isNaN(+v)) {
+// 			updateInterval = +v;
+// 			if (updateInterval < 1)
+// 				updateInterval = 1;
+// 			if (updateInterval > 2000)
+// 				updateInterval = 2000;
+// 			$(this).val("" + updateInterval);
+// 		}
+// 	});
 
-	//realtime chart
-	if($("#realtimechart").length)
-	{
-		var options = {
-			series: { shadowSize: 1 }, // drawing is faster without shadows
-			yaxis: { min: 0, max: 100 },
-			xaxis: { show: false }
-		};
-		var plot = $.plot($("#realtimechart"), [ getRandomData() ], options);
-		function update() {
-			plot.setData([ getRandomData() ]);
-			// since the axes don't change, we don't need to call plot.setupGrid()
-			plot.draw();
+// 	//realtime chart
+// 	if($("#realtimechart").length)
+// 	{
+// 		var options = {
+// 			series: { shadowSize: 1 }, // drawing is faster without shadows
+// 			yaxis: { min: 0, max: 100 },
+// 			xaxis: { show: false }
+// 		};
+// 		var plot = $.plot($("#realtimechart"), [ getRandomData() ], options);
+// 		function update() {
+// 			plot.setData([ getRandomData() ]);
+// 			// since the axes don't change, we don't need to call plot.setupGrid()
+// 			plot.draw();
 			
-			setTimeout(update, updateInterval);
-		}
+// 			setTimeout(update, updateInterval);
+// 		}
 
-		update();
-	}
+// 		update();
+// 	}
 }
 
 
 //additional functions for data table
-$.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
-{
-	return {
-		"iStart":         oSettings._iDisplayStart,
-		"iEnd":           oSettings.fnDisplayEnd(),
-		"iLength":        oSettings._iDisplayLength,
-		"iTotal":         oSettings.fnRecordsTotal(),
-		"iFilteredTotal": oSettings.fnRecordsDisplay(),
-		"iPage":          Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength ),
-		"iTotalPages":    Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
-	};
-}
-$.extend( $.fn.dataTableExt.oPagination, {
-	"bootstrap": {
-		"fnInit": function( oSettings, nPaging, fnDraw ) {
-			var oLang = oSettings.oLanguage.oPaginate;
-			var fnClickHandler = function ( e ) {
-				e.preventDefault();
-				if ( oSettings.oApi._fnPageChange(oSettings, e.data.action) ) {
-					fnDraw( oSettings );
-				}
-			};
+// $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
+// {
+// 	return {
+// 		"iStart":         oSettings._iDisplayStart,
+// 		"iEnd":           oSettings.fnDisplayEnd(),
+// 		"iLength":        oSettings._iDisplayLength,
+// 		"iTotal":         oSettings.fnRecordsTotal(),
+// 		"iFilteredTotal": oSettings.fnRecordsDisplay(),
+// 		"iPage":          Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength ),
+// 		"iTotalPages":    Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
+// 	};
+// }
+// $.extend( $.fn.dataTableExt.oPagination, {
+// 	"bootstrap": {
+// 		"fnInit": function( oSettings, nPaging, fnDraw ) {
+// 			var oLang = oSettings.oLanguage.oPaginate;
+// 			var fnClickHandler = function ( e ) {
+// 				e.preventDefault();
+// 				if ( oSettings.oApi._fnPageChange(oSettings, e.data.action) ) {
+// 					fnDraw( oSettings );
+// 				}
+// 			};
 
-			$(nPaging).addClass('pagination').append(
-				'<ul>'+
-					'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
-					'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
-				'</ul>'
-			);
-			var els = $('a', nPaging);
-			$(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
-			$(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
-		},
+// 			$(nPaging).addClass('pagination').append(
+// 				'<ul>'+
+// 					'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
+// 					'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
+// 				'</ul>'
+// 			);
+// 			var els = $('a', nPaging);
+// 			$(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
+// 			$(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
+// 		},
 
-		"fnUpdate": function ( oSettings, fnDraw ) {
-			var iListLength = 5;
-			var oPaging = oSettings.oInstance.fnPagingInfo();
-			var an = oSettings.aanFeatures.p;
-			var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
+// 		"fnUpdate": function ( oSettings, fnDraw ) {
+// 			var iListLength = 5;
+// 			var oPaging = oSettings.oInstance.fnPagingInfo();
+// 			var an = oSettings.aanFeatures.p;
+// 			var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
 
-			if ( oPaging.iTotalPages < iListLength) {
-				iStart = 1;
-				iEnd = oPaging.iTotalPages;
-			}
-			else if ( oPaging.iPage <= iHalf ) {
-				iStart = 1;
-				iEnd = iListLength;
-			} else if ( oPaging.iPage >= (oPaging.iTotalPages-iHalf) ) {
-				iStart = oPaging.iTotalPages - iListLength + 1;
-				iEnd = oPaging.iTotalPages;
-			} else {
-				iStart = oPaging.iPage - iHalf + 1;
-				iEnd = iStart + iListLength - 1;
-			}
+// 			if ( oPaging.iTotalPages < iListLength) {
+// 				iStart = 1;
+// 				iEnd = oPaging.iTotalPages;
+// 			}
+// 			else if ( oPaging.iPage <= iHalf ) {
+// 				iStart = 1;
+// 				iEnd = iListLength;
+// 			} else if ( oPaging.iPage >= (oPaging.iTotalPages-iHalf) ) {
+// 				iStart = oPaging.iTotalPages - iListLength + 1;
+// 				iEnd = oPaging.iTotalPages;
+// 			} else {
+// 				iStart = oPaging.iPage - iHalf + 1;
+// 				iEnd = iStart + iListLength - 1;
+// 			}
 
-			for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
-				// remove the middle elements
-				$('li:gt(0)', an[i]).filter(':not(:last)').remove();
+// 			for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
+// 				// remove the middle elements
+// 				$('li:gt(0)', an[i]).filter(':not(:last)').remove();
 
-				// add the new list items and their event handlers
-				for ( j=iStart ; j<=iEnd ; j++ ) {
-					sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
-					$('<li '+sClass+'><a href="#">'+j+'</a></li>')
-						.insertBefore( $('li:last', an[i])[0] )
-						.bind('click', function (e) {
-							e.preventDefault();
-							oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
-							fnDraw( oSettings );
-						} );
-				}
+// 				// add the new list items and their event handlers
+// 				for ( j=iStart ; j<=iEnd ; j++ ) {
+// 					sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
+// 					$('<li '+sClass+'><a href="#">'+j+'</a></li>')
+// 						.insertBefore( $('li:last', an[i])[0] )
+// 						.bind('click', function (e) {
+// 							e.preventDefault();
+// 							oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
+// 							fnDraw( oSettings );
+// 						} );
+// 				}
 
-				// add / remove disabled classes from the static elements
-				if ( oPaging.iPage === 0 ) {
-					$('li:first', an[i]).addClass('disabled');
-				} else {
-					$('li:first', an[i]).removeClass('disabled');
-				}
+// 				// add / remove disabled classes from the static elements
+// 				if ( oPaging.iPage === 0 ) {
+// 					$('li:first', an[i]).addClass('disabled');
+// 				} else {
+// 					$('li:first', an[i]).removeClass('disabled');
+// 				}
 
-				if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
-					$('li:last', an[i]).addClass('disabled');
-				} else {
-					$('li:last', an[i]).removeClass('disabled');
-				}
-			}
-		}
-	}
-});
+// 				if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
+// 					$('li:last', an[i]).addClass('disabled');
+// 				} else {
+// 					$('li:last', an[i]).removeClass('disabled');
+// 				}
+// 			}
+// 		}
+// 	}
+// });

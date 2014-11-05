@@ -14,7 +14,7 @@ import (
 )
 
 import (
-	"labix.org/v2/mgo/bson"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Article struct {
@@ -170,7 +170,7 @@ func (article *Article) HasSummary() bool {
 }
 
 func (article *Article) UpdateViews() {
-	article.Views ++
+	article.Views++
 	article.UpdateArticle()
 }
 

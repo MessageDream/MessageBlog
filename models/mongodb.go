@@ -11,8 +11,8 @@ import (
 
 import (
 	"github.com/astaxie/beego"
-	"labix.org/v2/mgo"
-	"labix.org/v2/mgo/bson"
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 var (
@@ -22,6 +22,7 @@ var (
 )
 
 func InitDb() {
+
 	conn := common.Webconfig.Dbconn
 	if conn == "" {
 		beego.Error("数据库地址还没有配置,请到config内配置db字段.")

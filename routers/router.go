@@ -7,7 +7,7 @@ import (
 
 import (
 	"github.com/astaxie/beego"
-	"labix.org/v2/mgo/bson"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type baseRouter struct {

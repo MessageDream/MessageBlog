@@ -12,9 +12,12 @@ import (
 )
 
 func main() {
+
 	models.InitDb()
 	beego.SessionOn = true
-	beego.BeeLogger.SetLogger("file", `{"filename":"`+common.Webconfig.LogFile+`"}`)
+	beego.SetLogger("file", `{"filename":"`+common.Webconfig.LogFile+`"}`)
+	beego.SetLevel(beego.LevelInformational)
+	beego.SetLogFuncCall(true)
 	beego.Info("begin setting router")
 
 	beego.Router("/", &routers.HomeRouter{})

@@ -9,7 +9,7 @@ import (
 )
 
 import (
-	"labix.org/v2/mgo"
+	mgo "gopkg.in/mgo.v2"
 )
 
 // 分页结构体
